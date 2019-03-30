@@ -1,6 +1,6 @@
 #!/bin/sh
 
-version=2.1.26
+version=2.1.27
 build_version=4
 ARCHIVE=cyrus-sasl-$version
 openssl_build_version=3

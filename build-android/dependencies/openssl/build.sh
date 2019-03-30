@@ -161,10 +161,10 @@ function build {
 
 # start building.
 current_dir="`pwd`"
-build_armeabi
+#build_armeabi
 build_armeabi_v7a
-build_x86
-build_arm64_v8a
+#build_x86
+#build_arm64_v8a
 
 cd "$current_dir"
 zip -qry "$package_name-$build_version.zip" "$package_name-$build_version"
