@@ -59,15 +59,8 @@ function build {
   rm -rf "$current_dir/src"
 }
 
-# Start building.
-ANDROID_PLATFORM=android-16
-archs="armeabi armeabi-v7a x86"
-for arch in $archs ; do
-  TARGET_ARCH_ABI=$arch
-  build
-done
 ANDROID_PLATFORM=android-21
-archs="arm64-v8a"
+archs="armeabi-v7a"
 for arch in $archs ; do
   TARGET_ARCH_ABI=$arch
   build

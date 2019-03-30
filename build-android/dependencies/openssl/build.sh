@@ -31,7 +31,7 @@ function build_x86_64 {
   export ARCH=x86_64
   export CROSS_COMPILE="x86_64-linux-android-"
   export ANDROID_DEV="$ANDROID_NDK/platforms/$ANDROID_PLATFORM/$ARCH_FOLDER/usr"
-  export HOSTCC=gcc
+  export HOSTCC=clang
   
   build
 }
@@ -52,7 +52,7 @@ function build_armeabi {
   export ARCH=arm
   export CROSS_COMPILE="arm-linux-androideabi-"
   export ANDROID_DEV="$ANDROID_NDK/platforms/$ANDROID_PLATFORM/$ARCH_FOLDER/usr"
-  export HOSTCC=gcc
+  export HOSTCC=clang
 
   build
 }
@@ -72,7 +72,7 @@ function build_x86 {
   export ARCH=x86
   export CROSS_COMPILE="i686-linux-android-"
   export ANDROID_DEV="$ANDROID_NDK/platforms/$ANDROID_PLATFORM/$ARCH_FOLDER/usr"
-  export HOSTCC=gcc
+  export HOSTCC=clang
 
   build
 }
@@ -85,7 +85,7 @@ function build_armeabi_v7a {
   arch_dir_name="armeabi-v7a"
   # openssl_configure_mode="android-armeabi"
   openssl_configure_mode="android-armv7"
-  ANDROID_PLATFORM=android-16
+  ANDROID_PLATFORM=android-21
   ARCH_FOLDER=arch-arm
   export MACHINE=armv7-a
   export RELEASE=2.6.37
@@ -93,7 +93,7 @@ function build_armeabi_v7a {
   export ARCH=arm
   export CROSS_COMPILE="arm-linux-androideabi-"
   export ANDROID_DEV="$ANDROID_NDK/platforms/$ANDROID_PLATFORM/$ARCH_FOLDER/usr"
-  export HOSTCC=gcc
+  export HOSTCC=clang
  
   build
 }
@@ -114,7 +114,7 @@ function build_arm64_v8a {
   export ARCH=aarch64
   export CROSS_COMPILE="aarch64-linux-android-"
   export ANDROID_DEV="$ANDROID_NDK/platforms/$ANDROID_PLATFORM/$ARCH_FOLDER/usr"
-  export HOSTCC=gcc
+  export HOSTCC=clang
   
   build
 }
