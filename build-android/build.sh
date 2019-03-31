@@ -56,14 +56,14 @@ tar xzf "$current_dir/../build-mac/autogen-result.tar.gz"
 ./configure
 make prepare
 
+pushd "$current_dir/../include"
+make
+popd
+
 # Copy public headers to include
 cp -r include/libetpan "$current_dir/include"
 mkdir -p "$current_dir/$package_name-$build_version/include"
 cp -r include/libetpan "$current_dir/$package_name-$build_version/include"
-
-pushd "$current_dir/../include"
-make
-popd
 
 # Start building.
 ANDROID_PLATFORM=android-21
