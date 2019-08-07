@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 version=2.1.27
 build_version=4
 ARCHIVE=cyrus-sasl-$version
@@ -56,7 +58,6 @@ function build {
 
   mkdir -p "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
   cp "$current_dir/src/$ARCHIVE/build-android/obj/local/$TARGET_ARCH_ABI/libsasl2.a" "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
-  rm -rf "$current_dir/src"
 }
 
 ANDROID_PLATFORM=android-21
@@ -68,4 +69,3 @@ done
 
 cd "$current_dir"
 zip -qry "$package_name-$build_version.zip" "$package_name-$build_version"
-rm -rf "$package_name-$build_version"

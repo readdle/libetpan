@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 version=1.15
 build_version=1
 package_name=iconv-android
@@ -56,6 +58,5 @@ if test ! -f $current_dir/$package_name-$build_version.zip; then
 
   cd "$current_dir"
   zip -qry "$package_name-$build_version.zip" "$package_name-$build_version"
-  rm -rf "$package_name-$build_version"
 fi 
 

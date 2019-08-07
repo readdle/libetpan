@@ -1,7 +1,6 @@
 #!/bin/sh
 
 build_version=3
-version=1.0.2s
 package_name=openssl-android
 
 rm -rf $package_name-$build_version

@@ -45,7 +45,6 @@ function build {
 
   mkdir -p "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
   cp "$current_dir/obj/local/$TARGET_ARCH_ABI/libetpan.a" "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
-  rm -rf "$current_dir/obj"
 }
 
 mkdir -p "$current_dir/third-party"
