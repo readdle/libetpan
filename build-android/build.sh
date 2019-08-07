@@ -1,5 +1,8 @@
 #!/bin/sh
 
+set -ex
+env
+
 build_version=7
 openssl_build_version=3
 cyrus_sasl_build_version=4
