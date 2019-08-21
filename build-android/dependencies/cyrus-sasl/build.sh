@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -ex
+set -e
 
 version=2.1.27
 build_version=4

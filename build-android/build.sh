@@ -1,7 +1,6 @@
 #!/bin/sh
 
-set -ex
-env
+set -e
 
 build_version=7
 openssl_build_version=3

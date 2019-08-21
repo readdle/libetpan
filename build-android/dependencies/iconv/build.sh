@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -ex
+set -e
 
 version=1.15
 build_version=1
