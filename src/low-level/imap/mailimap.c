@@ -2030,7 +2030,7 @@ int mailimap_rename(mailimap * session,
   if (r != MAILIMAP_NO_ERROR)
 	return r;
 
-  if (!mailimap_crlf_send(session->imap_stream))
+  r = mailimap_crlf_send(session->imap_stream);
   if (r != MAILIMAP_NO_ERROR)
 	return r;
 
@@ -2427,6 +2427,13 @@ int mailimap_starttls(mailimap * session)
   error_code = response->rsp_resp_done->rsp_data.rsp_tagged->rsp_cond_state->rsp_type;
 
   mailimap_response_free(response);
+
+  // Detect if the server send extra data after the STARTTLS response.
+  // This *may* be a "response injection attack".
+  if (session->imap_stream->read_buffer_len != 0) {
+      // Since it is also an IMAP protocol violation, exit.
+      return MAILIMAP_ERROR_STARTTLS;
+  }
 
   switch (error_code) {
   case MAILIMAP_RESP_COND_STATE_OK:
