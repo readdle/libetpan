@@ -3,7 +3,7 @@
 set -e
 
 version=1.15
-build_version=1
+build_version=1.15
 package_name=iconv-android
 current_dir="`pwd`"
 

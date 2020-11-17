@@ -3,9 +3,9 @@
 set -e
 
 version=2.1.27
-build_version=4
+build_version=2.1.27
 ARCHIVE=cyrus-sasl-$version
-openssl_build_version=3
+openssl_build_version=swift-toolchain
 package_name=cyrus-sasl-android
 
 if test "x$ANDROID_NDK" = x ; then

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-build_version=3
+build_version=swift-toolchain
 package_name=openssl-android
 
 rm -rf $package_name-$build_version
@@ -23,4 +23,3 @@ cp $SWIFT_ANDROID_HOME/toolchain/usr/lib/swift/android/x86_64/libssl.a ./$packag
 
 cd "$current_dir"
 zip -qry "$package_name-$build_version.zip" "$package_name-$build_version"
-rm -rf "$package_name-$build_version"
