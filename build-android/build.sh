@@ -2,10 +2,9 @@
 
 set -e
 
-build_version=7
-openssl_build_version=3
-cyrus_sasl_build_version=4
-iconv_build_version=1
+openssl_build_version=swift-toolchain # OpenSSL from swift toolchain
+cyrus_sasl_build_version=2.1.27 # source code hardcoded in https://github.com/readdle/libetpan/tree/master/build-mac/dependencies/packages
+iconv_build_version=1.15 # version hardcoded in https://github.com/readdle/libetpan/blob/master/build-android/dependencies/iconv/build.sh
 package_name=libetpan-android
 
 current_dir="`pwd`"
@@ -42,8 +41,8 @@ function build {
     CYRUS_SASL_PATH="$current_dir/third-party/cyrus-sasl-android-$cyrus_sasl_build_version" \
     ICONV_PATH="$current_dir/third-party/iconv-android-$iconv_build_version"
 
-  mkdir -p "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
-  cp "$current_dir/obj/local/$TARGET_ARCH_ABI/libetpan.a" "$current_dir/$package_name-$build_version/libs/$TARGET_ARCH_ABI"
+  mkdir -p "$current_dir/$package_name/libs/$TARGET_ARCH_ABI"
+  cp "$current_dir/obj/local/$TARGET_ARCH_ABI/libetpan.a" "$current_dir/$package_name/libs/$TARGET_ARCH_ABI"
 }
 
 mkdir -p "$current_dir/third-party"
@@ -63,8 +62,8 @@ popd
 
 # Copy public headers to include
 cp -r include/libetpan "$current_dir/include"
-mkdir -p "$current_dir/$package_name-$build_version/include"
-cp -r include/libetpan "$current_dir/$package_name-$build_version/include"
+mkdir -p "$current_dir/$package_name/include"
+cp -r include/libetpan "$current_dir/$package_name/include"
 
 # Start building.
 ANDROID_PLATFORM=android-21
@@ -75,6 +74,3 @@ for arch in $archs ; do
 done
 
 rm -rf "$current_dir/third-party"
-cd "$current_dir"
-zip -qry "$package_name-$build_version.zip" "$package_name-$build_version"
-rm -rf "$package_name-$build_version"
