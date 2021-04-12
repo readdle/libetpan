@@ -186,31 +186,47 @@ for TARGET in $TARGETS; do
       done
 done
 
-echo "*** creating universal libs ***" >> "$logfile" 2>&1
-
 rm -rf "$INSTALL_PATH"
 mkdir -p "$INSTALL_PATH"
-mkdir -p "$INSTALL_PATH/lib"
 mkdir -p "$INSTALL_PATH/include/sasl"
 cp `find ./include -name '*.h'` "${INSTALL_PATH}/include/sasl"
 ALL_LIBS="libsasl2.a sasl2/libanonymous.a sasl2/libcrammd5.a sasl2/libplain.a sasl2/libsasldb.a sasl2/liblogin.a"
-for lib in $ALL_LIBS; do
-    dir="`dirname $lib`"
-    if [[ "$dir" != "." ]]; then
-        mkdir -p ${INSTALL_PATH}/lib/$dir
-    fi
-    LIBS=
-    for TARGET in $TARGETS; do
-        LIBS="$LIBS ${BUILD_DIR}/${LIB_NAME}/${TARGET}${SDK_IOS_VERSION}*/lib/${lib}"
+for TARGET in $TARGETS; do
+    ALL_UNIVERSAL_LIBS=
+    TARGET_INSTALL_PATH="${INSTALL_PATH}/$TARGET"
+    mkdir -p ${TARGET_INSTALL_PATH}/lib
+
+    for lib in $ALL_LIBS; do
+        echo "creating universal ${TARGET} ${lib}"
+        echo "*** creating universal ${TARGET} ${lib} ***" >> "$logfile" 2>&1
+
+        dir="`dirname $lib`"
+        if [[ "$dir" != "." ]]; then
+            mkdir -p ${TARGET_INSTALL_PATH}/lib/$dir
+        fi
+        LIBS="${BUILD_DIR}/${LIB_NAME}/${TARGET}${SDK_IOS_VERSION}*/lib/${lib}"
+        UNIVERSAL_LIB="${TARGET_INSTALL_PATH}/lib/${lib}"
+        lipo -create ${LIBS} -output ${UNIVERSAL_LIB}
+        if [[ "$?" != "0" ]]; then
+          echo "BUILD FAILED"
+          cat "$logfile"
+          exit 1
+        fi
+        ALL_UNIVERSAL_LIBS="${ALL_UNIVERSAL_LIBS} ${UNIVERSAL_LIB}"
     done
-    echo "lipo -create ${LIBS} -output '${INSTALL_PATH}/lib/${lib}'"
-    lipo -create ${LIBS} -output "${INSTALL_PATH}/lib/${lib}"
-    if [[ "$?" != "0" ]]; then
-      echo "BUILD FAILED"
-      cat "$logfile"
-      exit 1
-    fi
+
+    # echo "merging ${TARGET} universal libs"
+    # echo "*** merging ${TARGET} universal libs ***" >> "$logfile" 2>&1
+
+    # libtool ${ALL_UNIVERSAL_LIBS} -o "${TARGET_INSTALL_PATH}/libsasl.a"
+    # if [[ "$?" != "0" ]]; then
+    #   echo "BUILD FAILED"
+    #   cat "$logfile"
+    #   exit 1
+    # fi
 done
+
+exit 1
 
 echo "*** creating built package ***" >> "$logfile" 2>&1
 
