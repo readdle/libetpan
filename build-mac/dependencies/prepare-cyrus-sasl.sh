@@ -226,6 +226,19 @@ for TARGET in $TARGETS; do
     # fi
 done
 
+echo "creating xcframework"
+echo "*** creating xcframework ***" >> "$logfile" 2>&1
+xcodebuild -create-xcframework \
+ -library "${INSTALL_PATH}/iPhoneOS/lib/libsasl2.a" -headers "${INSTALL_PATH}/include" \
+ -library "${INSTALL_PATH}/iPhoneSimulator/lib/libsasl2.a" -headers "${INSTALL_PATH}/include" \
+ -output sasl2.xcframework
+
+if [[ "$?" != "0" ]]; then
+  echo "BUILD FAILED"
+  cat "$logfile"
+  exit 1
+fi
+
 exit 1
 
 echo "*** creating built package ***" >> "$logfile" 2>&1
