@@ -1887,7 +1887,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp \"$SRCROOT/libsasl-ios/lib/libsasl2.a\" \"$BUILT_PRODUCTS_DIR\"\n";
+			shellScript = "cp -R \"$SRCROOT/libsasl-ios/sasl.xcframework\" \"$BUILT_PRODUCTS_DIR\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2591,7 +2591,6 @@
 				);
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/libsasl-ios/lib";
 				PRODUCT_NAME = "etpan-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2612,7 +2611,6 @@
 				);
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/libsasl-ios/lib";
 				PRODUCT_NAME = "etpan-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
