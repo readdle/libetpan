@@ -206,7 +206,7 @@ for TARGET in $TARGETS; do
         fi
         LIBS="${BUILD_DIR}/${LIB_NAME}/${TARGET}${SDK_IOS_VERSION}*/lib/${lib}"
         UNIVERSAL_LIB="${TARGET_INSTALL_PATH}/lib/${lib}"
-        lipo -create ${LIBS} -output ${UNIVERSAL_LIB}
+        libtool -static ${LIBS} -o ${UNIVERSAL_LIB}
         if [[ "$?" != "0" ]]; then
           echo "BUILD FAILED"
           cat "$logfile"
@@ -214,24 +214,14 @@ for TARGET in $TARGETS; do
         fi
         ALL_UNIVERSAL_LIBS="${ALL_UNIVERSAL_LIBS} ${UNIVERSAL_LIB}"
     done
-
-    # echo "merging ${TARGET} universal libs"
-    # echo "*** merging ${TARGET} universal libs ***" >> "$logfile" 2>&1
-
-    # libtool ${ALL_UNIVERSAL_LIBS} -o "${TARGET_INSTALL_PATH}/libsasl.a"
-    # if [[ "$?" != "0" ]]; then
-    #   echo "BUILD FAILED"
-    #   cat "$logfile"
-    #   exit 1
-    # fi
 done
 
 echo "creating xcframework"
 echo "*** creating xcframework ***" >> "$logfile" 2>&1
 xcodebuild -create-xcframework \
- -library "${INSTALL_PATH}/iPhoneOS/lib/libsasl2.a" -headers "${INSTALL_PATH}/include" \
- -library "${INSTALL_PATH}/iPhoneSimulator/lib/libsasl2.a" -headers "${INSTALL_PATH}/include" \
- -output sasl2.xcframework
+ -library "${INSTALL_PATH}/iPhoneOS/lib/libsasl2.a" \
+ -library "${INSTALL_PATH}/iPhoneSimulator/lib/libsasl2.a" \
+ -output "${INSTALL_PATH}/sasl.xcframework"
 
 if [[ "$?" != "0" ]]; then
   echo "BUILD FAILED"
@@ -239,13 +229,13 @@ if [[ "$?" != "0" ]]; then
   exit 1
 fi
 
-exit 1
-
+echo "creating built package"
 echo "*** creating built package ***" >> "$logfile" 2>&1
 
 cd "$BUILD_DIR"
 mkdir -p libsasl-ios
-cp -r "$INSTALL_PATH"/* libsasl-ios/
+cp -R "${INSTALL_PATH}/sasl.xcframework" libsasl-ios
+cp -R "${INSTALL_PATH}/include" libsasl-ios
 tar -czf "libsasl-$version-ios.tar.gz" libsasl-ios
 mkdir -p "$resultdir"
 mv "libsasl-$version-ios.tar.gz" "$resultdir"
