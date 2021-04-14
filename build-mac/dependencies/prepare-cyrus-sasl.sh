@@ -221,7 +221,7 @@ echo "*** creating xcframework ***" >> "$logfile" 2>&1
 xcodebuild -create-xcframework \
  -library "${INSTALL_PATH}/iPhoneOS/lib/libsasl2.a" \
  -library "${INSTALL_PATH}/iPhoneSimulator/lib/libsasl2.a" \
- -output "${INSTALL_PATH}/sasl.xcframework"
+ -output "${INSTALL_PATH}/lib/sasl.xcframework"
 
 if [[ "$?" != "0" ]]; then
   echo "BUILD FAILED"
@@ -234,7 +234,7 @@ echo "*** creating built package ***" >> "$logfile" 2>&1
 
 cd "$BUILD_DIR"
 mkdir -p libsasl-ios
-cp -R "${INSTALL_PATH}/sasl.xcframework" libsasl-ios
+cp -R "${INSTALL_PATH}/lib" libsasl-ios
 cp -R "${INSTALL_PATH}/include" libsasl-ios
 tar -czf "libsasl-$version-ios.tar.gz" libsasl-ios
 mkdir -p "$resultdir"
