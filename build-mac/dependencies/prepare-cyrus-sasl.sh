@@ -130,30 +130,36 @@ for TARGET in $TARGETS; do
 
     case $TARGET in
         (iPhoneOS)
-            ARCH=arm
-            MARCHS="armv7 armv7s arm64"
+            TARGET_TRIPLES=("armv7-apple-ios$SDK_IOS_MIN_VERSION" "armv7s-apple-ios$SDK_IOS_MIN_VERSION" "arm64-apple-ios$SDK_IOS_MIN_VERSION")
+            HOST_TRIPLES=("armv7-apple-darwin" "armv7s-apple-darwin" "aarch64-apple-darwin")
+            MARCHS=("armv7" "armv7s" "arm64")
             EXTRA_FLAGS="$BITCODE_FLAGS -miphoneos-version-min=$SDK_IOS_MIN_VERSION"
             ;;
         (iPhoneSimulator)
-            ARCH=i386
-            MARCHS="i386 x86_64"
+            TARGET_TRIPLES=("i386-apple-ios$SDK_IOS_MIN_VERSION-simulator" "x86_64-apple-ios$SDK_IOS_MIN_VERSION-simulator" "arm64-apple-ios$SDK_IOS_MIN_VERSION-simulator")
+            HOST_TRIPLES=("i386-apple-darwin" "x86_64-apple-darwin" "aarch64-apple-darwin")
+            MARCHS=("i386" "x86_64" "arm64")
             EXTRA_FLAGS="-miphoneos-version-min=$SDK_IOS_MIN_VERSION"
             ;;
     esac
 
-    for MARCH in $MARCHS; do
-				echo "building for $TARGET - $MARCH"
-				echo "*** building for $TARGET - $MARCH ***" >> "$logfile" 2>&1
+    for i in "${!TARGET_TRIPLES[@]}"; do 
+        TARGET_TRIPLE="${TARGET_TRIPLES[$i]}"
+        HOST_TRIPLE="${HOST_TRIPLES[$i]}"
+        MARCH="${MARCHS[$i]}"
 
+        echo "building for $TARGET - $MARCH (host: $HOST_TRIPLE, target: $TARGET_TRIPLE)"
+        echo "*** building for $TARGET - $MARCH (host: $HOST_TRIPLE, target: $TARGET_TRIPLE) ***" >> "$logfile" 2>&1
+        
         PREFIX=${BUILD_DIR}/${LIB_NAME}/${TARGET}${SDK_IOS_VERSION}${MARCH}
         rm -rf $PREFIX
 
-        export CPPFLAGS="-arch ${MARCH} -isysroot ${SYSROOT}"
+        export CPPFLAGS="-target ${TARGET_TRIPLE} -isysroot ${SYSROOT}"
         export CFLAGS="${CPPFLAGS} -Os ${EXTRA_FLAGS}"
 
         OPENSSL="--with-openssl=$BUILD_DIR/openssl-1.0.0d/universal"
         PLUGINS="--enable-otp=no --enable-digest=no --with-des=no --enable-login"
-        ./configure --host=${ARCH} --prefix=$PREFIX --enable-shared=no --enable-static=yes --with-pam=$BUILD_DIR/openpam-20071221/universal $PLUGINS >> "$logfile" 2>&1
+        ./configure --host=${HOST_TRIPLE} --prefix=$PREFIX --enable-shared=no --enable-static=yes --with-pam=$BUILD_DIR/openpam-20071221/universal $PLUGINS >> "$logfile" 2>&1
         make -j 8 >> "$logfile" 2>&1
         if [[ "$?" != "0" ]]; then
           echo "CONFIGURE FAILED"
@@ -180,31 +186,56 @@ for TARGET in $TARGETS; do
       done
 done
 
-echo "*** creating universal libs ***" >> "$logfile" 2>&1
-
 rm -rf "$INSTALL_PATH"
 mkdir -p "$INSTALL_PATH"
-mkdir -p "$INSTALL_PATH/lib"
 mkdir -p "$INSTALL_PATH/include/sasl"
 cp `find ./include -name '*.h'` "${INSTALL_PATH}/include/sasl"
 ALL_LIBS="libsasl2.a sasl2/libanonymous.a sasl2/libcrammd5.a sasl2/libplain.a sasl2/libsasldb.a sasl2/liblogin.a"
-for lib in $ALL_LIBS; do
-    dir="`dirname $lib`"
-    if [[ "$dir" != "." ]]; then
-        mkdir -p ${INSTALL_PATH}/lib/$dir
-    fi
-    LIBS=
-    for TARGET in $TARGETS; do
-        LIBS="$LIBS ${BUILD_DIR}/${LIB_NAME}/${TARGET}${SDK_IOS_VERSION}*/lib/${lib}"
+for TARGET in $TARGETS; do
+    ALL_UNIVERSAL_LIBS=
+    TARGET_INSTALL_PATH="${INSTALL_PATH}/$TARGET"
+    mkdir -p ${TARGET_INSTALL_PATH}/lib
+
+    for lib in $ALL_LIBS; do
+        echo "creating universal ${TARGET} ${lib}"
+        echo "*** creating universal ${TARGET} ${lib} ***" >> "$logfile" 2>&1
+
+        dir="`dirname $lib`"
+        if [[ "$dir" != "." ]]; then
+            mkdir -p ${TARGET_INSTALL_PATH}/lib/$dir
+        fi
+        LIBS="${BUILD_DIR}/${LIB_NAME}/${TARGET}${SDK_IOS_VERSION}*/lib/${lib}"
+        UNIVERSAL_LIB="${TARGET_INSTALL_PATH}/lib/${lib}"
+        libtool -static ${LIBS} -o ${UNIVERSAL_LIB}
+        if [[ "$?" != "0" ]]; then
+          echo "BUILD FAILED"
+          cat "$logfile"
+          exit 1
+        fi
+        ALL_UNIVERSAL_LIBS="${ALL_UNIVERSAL_LIBS} ${UNIVERSAL_LIB}"
     done
-    lipo -create ${LIBS} -output "${INSTALL_PATH}/lib/${lib}"
 done
 
+echo "creating xcframework"
+echo "*** creating xcframework ***" >> "$logfile" 2>&1
+xcodebuild -create-xcframework \
+ -library "${INSTALL_PATH}/iPhoneOS/lib/libsasl2.a" \
+ -library "${INSTALL_PATH}/iPhoneSimulator/lib/libsasl2.a" \
+ -output "${INSTALL_PATH}/lib/sasl.xcframework"
+
+if [[ "$?" != "0" ]]; then
+  echo "BUILD FAILED"
+  cat "$logfile"
+  exit 1
+fi
+
+echo "creating built package"
 echo "*** creating built package ***" >> "$logfile" 2>&1
 
 cd "$BUILD_DIR"
 mkdir -p libsasl-ios
-cp -r "$INSTALL_PATH"/* libsasl-ios/
+cp -R "${INSTALL_PATH}/lib" libsasl-ios
+cp -R "${INSTALL_PATH}/include" libsasl-ios
 tar -czf "libsasl-$version-ios.tar.gz" libsasl-ios
 mkdir -p "$resultdir"
 mv "libsasl-$version-ios.tar.gz" "$resultdir"
