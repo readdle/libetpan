@@ -50,6 +50,11 @@ pushd $temp_dir
 
     # Configure libetpan for Android
 	./autogen.sh --with-curl=no --disable-db --with-expat=no --host=$TARGET --with-openssl=./openssl-install --with-sasl=./sasl-install --enable-iconv
+
+	pushd include
+		make
+	popd
 popd
 
 cp $temp_dir/config.h ./config/android
+cp -r -L $temp_dir/include/libetpan ./include
