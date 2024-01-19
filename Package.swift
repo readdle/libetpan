@@ -21,6 +21,11 @@ private func files(withExtension ext: Set<String>, anchor: String = #file) -> [S
 
 let package = Package(
     name: "etpan",
+    defaultLocalization: "en",
+    platforms: [
+        .macOS(.v10_12),
+        .iOS(.v10)
+    ],
     products: [
         .library(name: "iconv", type: .static, targets: ["iconv"]),
         .library(name: "sasl2", type: .static, targets: ["sasl2"]),
@@ -36,7 +41,9 @@ let package = Package(
         .executable(name: "readmsg", targets: ["readmsg"]),
         .executable(name: "readmsg-simple", targets: ["readmsg-simple"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/krzyzanowskim/OpenSSL.git", .exact("1.1.2200"))
+    ],
     targets: [
         .target(
             name: "iconv",
@@ -46,14 +53,15 @@ let package = Package(
                 "libiconv/lib/iconv.c",
                 "libiconv/lib/relocatable.c"
             ],
-            publicHeadersPath: "include/android",
             cSettings: [
                 .headerSearchPath("libiconv/libcharset"),
                 .headerSearchPath("libiconv/libcharset/include"),
                 .headerSearchPath("libiconv/srclib"),
                 .headerSearchPath("libiconv/lib"),
-                .headerSearchPath("config/android"),
-                .define("ANDROID"),
+                .headerSearchPath("config/macos", .when(platforms: [.iOS])),
+                .headerSearchPath("config/ios", .when(platforms: [.macOS])),
+                .headerSearchPath("config/android", .when(platforms: [.android])),
+                .define("ANDROID", .when(platforms: [.android])),
                 .define("LIBDIR", to: "\"\""),
                 .define("BUILDING_LIBICONV"),
                 .define("IN_LIBRARY"),
@@ -64,8 +72,12 @@ let package = Package(
         ),
         .target(
             name: "sasl2",
+            dependencies: [
+                .product(name: "OpenSSL", package: "OpenSSL", condition: .when(platforms: [.iOS, .macOS])),
+            ],
             path: "dependencies/sasl2",
             sources: [
+                "cyrus-sasl/common/crypto-compat.c",
                 "cyrus-sasl/common/plugin_common.c",
                 "cyrus-sasl/lib/auxprop.c",
                 "cyrus-sasl/lib/canonusr.c",
@@ -93,9 +105,12 @@ let package = Package(
                 "cyrus-sasl/plugins/srp.c"
             ],
             cSettings: [
+                .headerSearchPath("cyrus-sasl/include"),
                 .headerSearchPath("cyrus-sasl/common"),
                 .headerSearchPath("cyrus-sasl/plugins"),
-                .headerSearchPath("config/android"),
+                .headerSearchPath("config/macos", .when(platforms: [.macOS])),
+                .headerSearchPath("config/ios", .when(platforms: [.iOS])),
+                .headerSearchPath("config/android", .when(platforms: [.android])),
                 .headerSearchPath("include/sasl"),
                 .define("GCC_FALLTHROUGH", to: "/* fall through */"),
                 .define("PLUGINDIR", to: "\"/usr/lib/sasl2\""),
@@ -107,13 +122,19 @@ let package = Package(
         ),
         .target(
             name: "etpan",
-            dependencies: ["sasl2", "iconv"],
+            dependencies: [
+                .product(name: "OpenSSL", package: "OpenSSL", condition: .when(platforms: [.iOS, .macOS])),
+                .target(name: "sasl2"),
+                .target(name: "iconv"),
+            ],
             path: ".",
             exclude: ["src/windows", "src/bsd"] + files(withExtension: ["in", "rc", "am", "Makefile", "TODO"]),
             sources: ["src"],
             cSettings: [
+                .headerSearchPath("config/macos", .when(platforms: [.macOS])),
+                .headerSearchPath("config/ios", .when(platforms: [.iOS])),
+                .headerSearchPath("config/android", .when(platforms: [.android])),
                 .headerSearchPath("dependencies/include/iconv"),
-                .headerSearchPath("config/android"),
                 .headerSearchPath("include/libetpan"),
                 .headerSearchPath("src"),
                 .headerSearchPath("src/data-types"),
@@ -141,9 +162,10 @@ let package = Package(
                 .define("HAVE_CONFIG_H", to: "1")
             ],
             linkerSettings: [
-                .linkedLibrary("crypto"),
-                .linkedLibrary("ssl"),
-                .linkedLibrary("z")
+                // We use system (aka toolchain) OpenSSL on Android, that's why we add linking here
+                .linkedLibrary("crypto", .when(platforms: [.android])),
+                .linkedLibrary("ssl", .when(platforms: [.android])),
+                .linkedLibrary("z"),
             ]
         ),
         .target(name: "option-parser", dependencies: ["etpan"], path: "tests", sources: ["option-parser.c"]),

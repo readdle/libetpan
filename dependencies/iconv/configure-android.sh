@@ -34,7 +34,7 @@ pushd $temp_dir/libiconv
 popd
 
 # Copy public header
-cp $temp_dir/libiconv/include/iconv.h ./include/android
+cp $temp_dir/libiconv/include/iconv.h ./include
 
 # Copy config headers
 cp $temp_dir/libiconv/config.h ./config/android

@@ -9,19 +9,19 @@
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
 /* Define to the number of bits in type 'ptrdiff_t'. */
-#define BITSIZEOF_PTRDIFF_T 64
+/* #undef BITSIZEOF_PTRDIFF_T */
 
 /* Define to the number of bits in type 'sig_atomic_t'. */
-#define BITSIZEOF_SIG_ATOMIC_T 32
+/* #undef BITSIZEOF_SIG_ATOMIC_T */
 
 /* Define to the number of bits in type 'size_t'. */
-#define BITSIZEOF_SIZE_T 64
+/* #undef BITSIZEOF_SIZE_T */
 
 /* Define to the number of bits in type 'wchar_t'. */
-#define BITSIZEOF_WCHAR_T 32
+/* #undef BITSIZEOF_WCHAR_T */
 
 /* Define to the number of bits in type 'wint_t'. */
-#define BITSIZEOF_WINT_T 32
+/* #undef BITSIZEOF_WINT_T */
 
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
    systems. This function is required for `alloca.c' support on those systems.
@@ -224,11 +224,11 @@
 
 /* Define to 1 if you have the Mac OS X function
    CFLocaleCopyPreferredLanguages in the CoreFoundation framework. */
-/* #undef HAVE_CFLOCALECOPYPREFERREDLANGUAGES */
+#define HAVE_CFLOCALECOPYPREFERREDLANGUAGES 1
 
 /* Define to 1 if you have the Mac OS X function CFPreferencesCopyAppValue in
    the CoreFoundation framework. */
-/* #undef HAVE_CFPREFERENCESCOPYAPPVALUE */
+#define HAVE_CFPREFERENCESCOPYAPPVALUE 1
 
 /* Define to 1 if you have the `copy_file_range' function. */
 /* #undef HAVE_COPY_FILE_RANGE */
@@ -258,11 +258,11 @@
 
 /* Define to 1 if you have the declaration of `ecvt', and to 0 if you don't.
    */
-#define HAVE_DECL_ECVT 0
+#define HAVE_DECL_ECVT 1
 
 /* Define to 1 if you have the declaration of `execvpe', and to 0 if you
    don't. */
-#define HAVE_DECL_EXECVPE 1
+#define HAVE_DECL_EXECVPE 0
 
 /* Define to 1 if you have the declaration of `fcloseall', and to 0 if you
    don't. */
@@ -270,7 +270,7 @@
 
 /* Define to 1 if you have the declaration of `fcvt', and to 0 if you don't.
    */
-#define HAVE_DECL_FCVT 0
+#define HAVE_DECL_FCVT 1
 
 /* Define to 1 if you have the declaration of `feof_unlocked', and to 0 if you
    don't. */
@@ -306,7 +306,7 @@
 
 /* Define to 1 if you have the declaration of `gcvt', and to 0 if you don't.
    */
-#define HAVE_DECL_GCVT 0
+#define HAVE_DECL_GCVT 1
 
 /* Define to 1 if you have the declaration of `getchar_unlocked', and to 0 if
    you don't. */
@@ -318,11 +318,11 @@
 
 /* Define to 1 if you have the declaration of `getdtablesize', and to 0 if you
    don't. */
-#define HAVE_DECL_GETDTABLESIZE 0
+#define HAVE_DECL_GETDTABLESIZE 1
 
 /* Define to 1 if you have the declaration of `getw', and to 0 if you don't.
    */
-#define HAVE_DECL_GETW 0
+#define HAVE_DECL_GETW 1
 
 /* Define to 1 if you have the declaration of `program_invocation_name', and
    to 0 if you don't. */
@@ -342,7 +342,7 @@
 
 /* Define to 1 if you have the declaration of `putw', and to 0 if you don't.
    */
-#define HAVE_DECL_PUTW 0
+#define HAVE_DECL_PUTW 1
 
 /* Define to 1 if you have the declaration of `setenv', and to 0 if you don't.
    */
@@ -364,13 +364,13 @@
 #define HAVE_DLFCN_H 1
 
 /* Define if you have the declaration of environ. */
-#define HAVE_ENVIRON_DECL 1
+/* #undef HAVE_ENVIRON_DECL */
 
 /* Define to 1 if you have the `error' function. */
-#define HAVE_ERROR 1
+/* #undef HAVE_ERROR */
 
 /* Define to 1 if you have the <error.h> header file. */
-#define HAVE_ERROR_H 1
+/* #undef HAVE_ERROR_H */
 
 /* Define to 1 if you have the `faccessat' function. */
 #define HAVE_FACCESSAT 1
@@ -379,7 +379,7 @@
 #define HAVE_FCNTL 1
 
 /* Define to 1 if you have the <features.h> header file. */
-#define HAVE_FEATURES_H 1
+/* #undef HAVE_FEATURES_H */
 
 /* Define if the 'free' function is guaranteed to preserve errno. */
 /* #undef HAVE_FREE_POSIX */
@@ -391,7 +391,7 @@
 #define HAVE_GETC_UNLOCKED 1
 
 /* Define to 1 if you have the `getdtablesize' function. */
-/* #undef HAVE_GETDTABLESIZE */
+#define HAVE_GETDTABLESIZE 1
 
 /* Define to 1 if you have the `getexecname' function. */
 /* #undef HAVE_GETEXECNAME */
@@ -403,13 +403,13 @@
 /* #undef HAVE_GETTEXT */
 
 /* Define if you have the iconv() function and it works. */
-/* #undef HAVE_ICONV */
+#define HAVE_ICONV 1
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
 /* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
-/* #undef HAVE_LANGINFO_CODESET */
+#define HAVE_LANGINFO_CODESET 1
 
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
@@ -442,7 +442,7 @@
 #define HAVE_MEMORY_H 1
 
 /* Define to 1 if you have the `mempcpy' function. */
-#define HAVE_MEMPCPY 1
+/* #undef HAVE_MEMPCPY */
 
 /* Define to 1 if you have the <minix/config.h> header file. */
 /* #undef HAVE_MINIX_CONFIG_H */
@@ -488,7 +488,7 @@
 #define HAVE_SETLOCALE 1
 
 /* Define to 1 if 'sig_atomic_t' is a signed integer type. */
-#define HAVE_SIGNED_SIG_ATOMIC_T 1
+/* #undef HAVE_SIGNED_SIG_ATOMIC_T */
 
 /* Define to 1 if 'wchar_t' is a signed integer type. */
 /* #undef HAVE_SIGNED_WCHAR_T */
@@ -524,19 +524,19 @@
 /* #undef HAVE_STRUCT_STAT_ST_ATIMENSEC */
 
 /* Define to 1 if `st_atimespec.tv_nsec' is a member of `struct stat'. */
-/* #undef HAVE_STRUCT_STAT_ST_ATIMESPEC_TV_NSEC */
+#define HAVE_STRUCT_STAT_ST_ATIMESPEC_TV_NSEC 1
 
 /* Define to 1 if `st_atim.st__tim.tv_nsec' is a member of `struct stat'. */
 /* #undef HAVE_STRUCT_STAT_ST_ATIM_ST__TIM_TV_NSEC */
 
 /* Define to 1 if `st_atim.tv_nsec' is a member of `struct stat'. */
-#define HAVE_STRUCT_STAT_ST_ATIM_TV_NSEC 1
+/* #undef HAVE_STRUCT_STAT_ST_ATIM_TV_NSEC */
 
 /* Define to 1 if `st_birthtimensec' is a member of `struct stat'. */
 /* #undef HAVE_STRUCT_STAT_ST_BIRTHTIMENSEC */
 
 /* Define to 1 if `st_birthtimespec.tv_nsec' is a member of `struct stat'. */
-/* #undef HAVE_STRUCT_STAT_ST_BIRTHTIMESPEC_TV_NSEC */
+#define HAVE_STRUCT_STAT_ST_BIRTHTIMESPEC_TV_NSEC 1
 
 /* Define to 1 if `st_birthtim.tv_nsec' is a member of `struct stat'. */
 /* #undef HAVE_STRUCT_STAT_ST_BIRTHTIM_TV_NSEC */
@@ -600,10 +600,10 @@
 #define HAVE_WINT_T 1
 
 /* Define to 1 if O_NOATIME works. */
-#define HAVE_WORKING_O_NOATIME 0
+#define HAVE_WORKING_O_NOATIME 1
 
 /* Define to 1 if O_NOFOLLOW works. */
-#define HAVE_WORKING_O_NOFOLLOW 0
+#define HAVE_WORKING_O_NOFOLLOW 1
 
 /* Define to 1 if you have the `_NSGetExecutablePath' function. */
 /* #undef HAVE__NSGETEXECUTABLEPATH */
@@ -622,7 +622,7 @@
     
 
 /* Define to 1 if ctype.h defines __header_inline. */
-/* #undef HAVE___HEADER_INLINE */
+#define HAVE___HEADER_INLINE 1
 
 /* Please see the Gnulib manual for how to use these macros.
 
@@ -742,13 +742,13 @@
 
 /* Define to 1 if 'lstat' dereferences a symlink specified with a trailing
    slash. */
-#define LSTAT_FOLLOWS_SLASHED_SYMLINK 1
+/* #undef LSTAT_FOLLOWS_SLASHED_SYMLINK */
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"
 
 /* If malloc(0) is != NULL, define this to 1. Otherwise define this to 0. */
-#define MALLOC_0_IS_NONNULL 0
+#define MALLOC_0_IS_NONNULL 1
 
 /* Use GNU style printf and scanf.  */
 #ifndef __USE_MINGW_ANSI_STDIO
@@ -760,7 +760,7 @@
 /* #undef MUSL_LIBC */
 
 /* Define to 1 if open() fails to recognize a trailing slash. */
-/* #undef OPEN_TRAILING_SLASH_BUG */
+#define OPEN_TRAILING_SLASH_BUG 1
 
 /* Name of package */
 #define PACKAGE "libiconv"
@@ -785,14 +785,14 @@
 
 /* Define to the type that is the result of default argument promotions of
    type mode_t. */
-#define PROMOTED_MODE_T mode_t
+#define PROMOTED_MODE_T int
 
 /* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
    'ptrdiff_t'. */
-#define PTRDIFF_T_SUFFIX l
+/* #undef PTRDIFF_T_SUFFIX */
 
 /* Define to 1 if readlink fails to recognize a trailing slash. */
-/* #undef READLINK_TRAILING_SLASH_BUG */
+#define READLINK_TRAILING_SLASH_BUG 1
 
 /* Define to 1 if readlink sets errno instead of truncating a too-long link.
    */
@@ -800,18 +800,18 @@
 
 /* Define to 1 if stat needs help when passed a file name with a trailing
    slash */
-/* #undef REPLACE_FUNC_STAT_FILE */
+#define REPLACE_FUNC_STAT_FILE 1
 
 /* Define to 1 if strerror(0) does not return a message implying success. */
 #define REPLACE_STRERROR_0 1
 
 /* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
    'sig_atomic_t'. */
-#define SIG_ATOMIC_T_SUFFIX 
+/* #undef SIG_ATOMIC_T_SUFFIX */
 
 /* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
    'size_t'. */
-#define SIZE_T_SUFFIX ul
+/* #undef SIZE_T_SUFFIX */
 
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
@@ -828,15 +828,15 @@
 #define STDC_HEADERS 1
 
 /* Define to 1 if strerror_r returns char *. */
-#define STRERROR_R_CHAR_P 1
+/* #undef STRERROR_R_CHAR_P */
 
 /* Define to 1 if the type of the st_atim member of a struct stat is struct
    timespec. */
-#define TYPEOF_STRUCT_STAT_ST_ATIM_IS_STRUCT_TIMESPEC 1
+/* #undef TYPEOF_STRUCT_STAT_ST_ATIM_IS_STRUCT_TIMESPEC */
 
 /* Define to the prefix of C symbols at the assembler and linker level, either
    an underscore or empty. */
-#define USER_LABEL_PREFIX 
+#define USER_LABEL_PREFIX _
 
 /* Enable extensions on AIX 3, Interix.  */
 #ifndef _ALL_SOURCE
@@ -938,11 +938,11 @@
 
 /* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
    'wchar_t'. */
-#define WCHAR_T_SUFFIX u
+/* #undef WCHAR_T_SUFFIX */
 
 /* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
    'wint_t'. */
-#define WINT_T_SUFFIX u
+/* #undef WINT_T_SUFFIX */
 
 /* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
    significant byte first (like Motorola and SPARC, unlike Intel). */

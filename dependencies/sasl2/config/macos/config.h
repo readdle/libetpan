@@ -103,7 +103,7 @@
 #define HAVE_GETADDRINFO /**/
 
 /* Define to 1 if you have the `getdomainname' function. */
-/* #undef HAVE_GETDOMAINNAME */
+#define HAVE_GETDOMAINNAME 1
 
 /* Define to 1 if you have the `gethostname' function. */
 #define HAVE_GETHOSTNAME 1
@@ -121,7 +121,7 @@
 /* #undef HAVE_GETSPNAM */
 
 /* do we have getsubopt()? */
-/* #undef HAVE_GETSUBOPT */
+#define HAVE_GETSUBOPT /**/
 
 /* Define to 1 if you have the `gettimeofday' function. */
 #define HAVE_GETTIMEOFDAY 1
@@ -189,7 +189,7 @@
 /* #undef HAVE_KRB */
 
 /* Define to 1 if you have the <krb5.h> header file. */
-/* #undef HAVE_KRB5_H */
+#define HAVE_KRB5_H 1
 
 /* Define to 1 if you have the `krb_get_err_text' function. */
 /* #undef HAVE_KRB_GET_ERR_TEXT */
@@ -204,13 +204,13 @@
 /* #undef HAVE_LDAP_H */
 
 /* Define to 1 if you have the `resolv' library (-lresolv). */
-/* #undef HAVE_LIBRESOLV */
+#define HAVE_LIBRESOLV 1
 
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
 
 /* Define to 1 if you have the <malloc.h> header file. */
-#define HAVE_MALLOC_H 1
+/* #undef HAVE_MALLOC_H */
 
 /* Define to 1 if you have the `memcpy' function. */
 #define HAVE_MEMCPY 1
@@ -237,7 +237,7 @@
 /* #undef HAVE_OPIE */
 
 /* Support for PAM? */
-/* #undef HAVE_PAM */
+#define HAVE_PAM /**/
 
 /* Define to 1 if you have the <paths.h> header file. */
 #define HAVE_PATHS_H 1
@@ -264,7 +264,7 @@
 #define HAVE_SNPRINTF /**/
 
 /* Does sockaddr have an sa_len? */
-/* #undef HAVE_SOCKADDR_SA_LEN */
+#define HAVE_SOCKADDR_SA_LEN /**/
 
 /* Define to 1 if you have the `socket' function. */
 #define HAVE_SOCKET 1
@@ -353,7 +353,7 @@
 #define HAVE_SYS_STAT_H 1
 
 /* Define to 1 if you have the <sys/time.h> header file. */
-#define TIME_WITH_SYS_TIME 1
+#define HAVE_SYS_TIME_H 1
 
 /* Define to 1 if you have the <sys/types.h> header file. */
 #define HAVE_SYS_TYPES_H 1

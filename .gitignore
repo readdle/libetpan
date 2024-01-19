@@ -160,3 +160,5 @@ third-party
 /build-windows/.vs/libetpan/v15
 libetpan-config.in
 iconv-android-1.zip
+Package.resolved
+.build-ios

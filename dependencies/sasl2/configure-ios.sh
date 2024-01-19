@@ -9,17 +9,17 @@ cd $current_dir
 rm -rf $temp_dir
 mkdir -p $temp_dir
 
-export TOOLCHAIN=$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64
-export TARGET=aarch64-linux-android
-export API=24
-export AR=$TOOLCHAIN/bin/llvm-ar
-export CC=$TOOLCHAIN/bin/$TARGET$API-clang
-export AS=$CC
-export CXX=$TOOLCHAIN/bin/$TARGET$API-clang++
-export LD=$TOOLCHAIN/bin/ld
-export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
-export STRIP=$TOOLCHAIN/bin/llvm-strip
-PATH=$TOOLCHAIN/bin:$PATH
+TARGET="iPhoneOS"
+SDK_IOS_MIN_VERSION=10.0
+DEVELOPER="$(xcode-select --print-path)"
+SDK=$(xcrun --sdk iphoneos --show-sdk-path)
+
+export CROSS_TOP="${SDK%%/SDKs/*}"
+export CROSS_SDK="${SDK##*/SDKs/}"
+if [ -z "$CROSS_TOP" -o -z "$CROSS_SDK" ]; then
+	echo "Failed to parse SDK path '${SDK}'!" >&1
+	exit 2
+fi
 
 # Copy public headers from cyrus-sasl and data-types (md5)
 pushd cyrus-sasl
@@ -37,21 +37,25 @@ pushd $temp_dir
 	# Unforunetly SASL configure works only with shared library
 	mkdir -p $temp_dir/openssl
 	mkdir -p $temp_dir/openssl-install
-	OPENSSL_VERSION=1.1.1w
+	OPENSSL_VERSION=1.1.1v
 	DOWNLOAD_URL_OPENSSL=https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz
 	wget $DOWNLOAD_URL_OPENSSL -O openssl.tar.gz
 	tar -xvf openssl.tar.gz -C openssl --strip-components=1
    	pushd openssl
-    	./Configure android-arm64 -D__ANDROID_API__=$API \
-    	    no-engine \
-    	    zlib \
-    	    --prefix=$temp_dir/openssl-install
+    	./Configure ios64-cross --prefix=$temp_dir/openssl-install
     	make && make install_sw
     popd
 
-	# Configure SASL for Android
+    TARGET_TRIPLE="arm64-apple-ios$SDK_IOS_MIN_VERSION"
+	HOST_TRIPLE="aarch64-apple-darwin"
+	MARCH="arm64"
+
+	SDK_IOS_VERSION="`xcodebuild -showsdks 2>/dev/null | grep 'sdk iphoneos' | sed 's/.*iphoneos\(.*\)/\1/'`"
+	SDK_ID="$(echo "$TARGET$SDK_IOS_VERSION" | tr A-Z a-z)"
+	SYSROOT="$(xcodebuild -version -sdk "$SDK_ID" 2>/dev/null | egrep '^Path: ' | cut -d ' ' -f 2)"
+
 	pushd cyrus-sasl
-		./autogen.sh --host=$TARGET \
+		./autogen.sh --host=$TARGET_TRIPLE \
 			--with-openssl=$temp_dir/openssl-install \
 			--enable-login \
 			--enable-ntlm \
@@ -61,6 +65,4 @@ pushd $temp_dir
 	popd
 popd
 
-# Copy config.h and fix TIME_WITH_SYS_TIME on Android (bug in configure)
-cp $temp_dir/cyrus-sasl/config.h ./config/android
-sed -i '' 's/HAVE_SYS_TIME_H 1/TIME_WITH_SYS_TIME 1/g' ./config/android/config.h
+cp $temp_dir/cyrus-sasl/config.h ./config/ios
