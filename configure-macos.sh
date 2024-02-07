@@ -36,7 +36,7 @@ pushd $temp_dir
     cp .build/debug/libsasl2.a sasl-install/lib/
 
     # Configure libetpan
-	./autogen.sh --with-curl=no --disable-db --with-expat=no --with-openssl=$temp_dir/openssl-install --with-sasl=./sasl-install --enable-iconv
+	./autogen.sh --with-curl=no --disable-db --with-expat=no --with-openssl=$temp_dir/openssl-install --with-sasl=./sasl-install --enable-iconv --with-poll
 
 	pushd include
 		make

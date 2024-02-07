@@ -49,7 +49,7 @@ pushd $temp_dir
     cp .build/debug/libsasl2.a sasl-install/lib/
 
     # Configure libetpan for Android
-	./autogen.sh --with-curl=no --disable-db --with-expat=no --host=$TARGET --with-openssl=./openssl-install --with-sasl=./sasl-install --enable-iconv
+	./autogen.sh --with-curl=no --disable-db --with-expat=no --host=$TARGET --with-openssl=./openssl-install --with-sasl=./sasl-install --enable-iconv --with-poll
 
 	pushd include
 		make

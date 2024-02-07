@@ -98,7 +98,7 @@
 #define HAVE_SYS_PARAM_H 1
 
 /* Define to 1 if you have the <sys/poll.h> header file. */
-/* #undef HAVE_SYS_POLL_H */
+#define HAVE_SYS_POLL_H 1
 
 /* Define to 1 if you have the <sys/select.h> header file. */
 #define HAVE_SYS_SELECT_H 1
@@ -173,7 +173,7 @@
 /* #undef USE_GNUTLS */
 
 /* use poll instead of select */
-/* #undef USE_POLL */
+#define USE_POLL 1
 
 /* Define to use SASL */
 #define USE_SASL 1

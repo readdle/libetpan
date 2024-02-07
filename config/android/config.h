@@ -31,7 +31,7 @@
 /* Define to use getopt_long */
 #define HAVE_GETOPT_LONG 1
 
-/* Define to 1 if you have the 'getpagesize' function. */
+/* Define to 1 if you have the `getpagesize' function. */
 #define HAVE_GETPAGESIZE 1
 
 /* Define if you have the iconv() function. */
@@ -46,23 +46,26 @@
 /* Define to enable IPv6 support. */
 #define HAVE_IPV6 1
 
-/* Define to 1 if you have the 'lockfile' library (-llockfile). */
+/* Define to 1 if you have the `lockfile' library (-llockfile). */
 /* #undef HAVE_LIBLOCKFILE */
 
-/* Define to 1 if you have the 'nsl' library (-lnsl). */
+/* Define to 1 if you have the `nsl' library (-lnsl). */
 /* #undef HAVE_LIBNSL */
 
-/* Define to 1 if you have the 'socket' library (-lsocket). */
+/* Define to 1 if you have the `socket' library (-lsocket). */
 /* #undef HAVE_LIBSOCKET */
 
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
 
+/* Define to 1 if you have the <memory.h> header file. */
+#define HAVE_MEMORY_H 1
+
 /* Defined if we run on a W32 API based system */
 /* #undef HAVE_MINGW32_SYSTEM */
 
-/* Define to 1 if you have a working 'mmap' system call. */
-#define HAVE_MMAP 1
+/* Define to 1 if you have a working `mmap' system call. */
+/* #undef HAVE_MMAP */
 
 /* Define to 1 if you have the <netdb.h> header file. */
 #define HAVE_NETDB_H 1
@@ -78,9 +81,6 @@
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
-
-/* Define to 1 if you have the <stdio.h> header file. */
-#define HAVE_STDIO_H 1
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #define HAVE_STDLIB_H 1
@@ -98,7 +98,7 @@
 #define HAVE_SYS_PARAM_H 1
 
 /* Define to 1 if you have the <sys/poll.h> header file. */
-/* #undef HAVE_SYS_POLL_H */
+#define HAVE_SYS_POLL_H 1
 
 /* Define to 1 if you have the <sys/select.h> header file. */
 #define HAVE_SYS_SELECT_H 1
@@ -163,9 +163,7 @@
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "1.9.4"
 
-/* Define to 1 if all of the C89 standard headers exist (not just the ones
-   required in a freestanding environment). This macro is provided for
-   backward compatibility; new code need not use it. */
+/* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Define to be lazy on protocol syntax */
@@ -175,7 +173,7 @@
 /* #undef USE_GNUTLS */
 
 /* use poll instead of select */
-/* #undef USE_POLL */
+#define USE_POLL 1
 
 /* Define to use SASL */
 #define USE_SASL 1
@@ -186,7 +184,7 @@
 /* Version number of package */
 #define VERSION "1.9.4"
 
-/* Define to '__inline__' or '__inline' if that's what the C compiler
+/* Define to `__inline__' or `__inline' if that's what the C compiler
    calls it, or to nothing if 'inline' is not supported under any name.  */
 #ifndef __cplusplus
 /* #undef inline */

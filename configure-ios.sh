@@ -50,7 +50,7 @@ pushd $temp_dir
     cp .build-ios/Build/Products/Debug-iphonesimulator/sasl2.o sasl-install/lib/
 
     # Configure libetpan
-	./autogen.sh --with-curl=no --disable-db --with-expat=no --host=$TARGET_TRIPLE --with-openssl=./openssl-install --with-sasl=./sasl-install --enable-iconv
+	./autogen.sh --with-curl=no --disable-db --with-expat=no --host=$TARGET_TRIPLE --with-openssl=./openssl-install --with-sasl=./sasl-install --enable-iconv --with-poll
 
 	pushd include
 		make
