@@ -4,7 +4,7 @@
 import Foundation
 import PackageDescription
 
-private func files(withExtension ext: Set<String>, anchor: String = #file) -> [String] {
+private func files(withExtension ext: Set<String>, anchor: String = #filePath) -> [String] {
     let baseURL = URL(fileURLWithPath: anchor)
         .deletingLastPathComponent()
 
