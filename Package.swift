@@ -4,21 +4,6 @@
 import Foundation
 import PackageDescription
 
-private func files(withExtension ext: Set<String>, anchor: String = #filePath) -> [String] {
-    let baseURL = URL(fileURLWithPath: anchor)
-        .deletingLastPathComponent()
-
-    let allFiles = FileManager.default
-        .enumerator(atPath: baseURL.path)?
-        .allObjects ?? []
-
-    return allFiles
-        .compactMap { $0 as? String }
-        .map { URL(fileURLWithPath: $0) }
-        .filter { ext.contains($0.pathExtension) || ext.contains($0.lastPathComponent) }
-        .map { $0.relativePath }
-}
-
 let package = Package(
     name: "etpan",
     defaultLocalization: "en",
@@ -128,7 +113,48 @@ let package = Package(
                 .target(name: "iconv"),
             ],
             path: ".",
-            exclude: ["src/windows", "src/bsd"] + files(withExtension: ["in", "rc", "am", "Makefile", "TODO"]),
+            exclude: [
+                "src/windows",
+                "src/bsd",
+                "src/low-level/imap/TODO",
+                "src/low-level/imap/Makefile.am",
+                "src/low-level/mh/Makefile.am",
+                "src/low-level/mbox/TODO",
+                "src/low-level/mbox/Makefile.am",
+                "src/low-level/Makefile.am",
+                "src/low-level/imf/TODO",
+                "src/low-level/imf/Makefile.am",
+                "src/low-level/feed/Makefile.am",
+                "src/low-level/smtp/TODO",
+                "src/low-level/smtp/Makefile.am",
+                "src/low-level/pop3/Makefile.am",
+                "src/low-level/mime/TODO",
+                "src/low-level/mime/Makefile.am",
+                "src/low-level/maildir/Makefile.am",
+                "src/low-level/nntp/Makefile.am",
+                "src/data-types/Makefile.am",
+                "src/driver/interface/Makefile.am",
+                "src/driver/tools/Makefile.am",
+                "src/driver/TODO",
+                "src/driver/Makefile.am",
+                "src/driver/implementation/data-message/Makefile.am",
+                "src/driver/implementation/imap/Makefile.am",
+                "src/driver/implementation/mh/Makefile.am",
+                "src/driver/implementation/mbox/Makefile.am",
+                "src/driver/implementation/Makefile.am",
+                "src/driver/implementation/feed/Makefile.am",
+                "src/driver/implementation/pop3/Makefile.am",
+                "src/driver/implementation/db/Makefile.am",
+                "src/driver/implementation/maildir/Makefile.am",
+                "src/driver/implementation/nntp/Makefile.am",
+                "src/driver/implementation/hotmail/Makefile.am",
+                "src/driver/implementation/mime-message/Makefile.am",
+                "src/versioninfo.rc.in",
+                "src/Makefile.am",
+                "src/main/libetpan_version.h.in",
+                "src/main/Makefile.am",
+                "src/engine/Makefile.am",
+            ],
             sources: ["src"],
             cSettings: [
                 .headerSearchPath("config/macos", .when(platforms: [.macOS])),
