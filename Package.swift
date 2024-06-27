@@ -109,8 +109,8 @@ let package = Package(
             name: "etpan",
             dependencies: [
                 .product(name: "OpenSSL", package: "OpenSSL", condition: .when(platforms: [.iOS, .macOS])),
-                .target(name: "sasl2"),
-                .target(name: "iconv"),
+                .target(name: "sasl2", condition: .when(platforms: [.android, .iOS])),
+                .target(name: "iconv", condition: .when(platforms: [.android])),
             ],
             path: ".",
             exclude: [
@@ -160,7 +160,7 @@ let package = Package(
                 .headerSearchPath("config/macos", .when(platforms: [.macOS])),
                 .headerSearchPath("config/ios", .when(platforms: [.iOS])),
                 .headerSearchPath("config/android", .when(platforms: [.android])),
-                .headerSearchPath("dependencies/include/iconv"),
+                .headerSearchPath("dependencies/include/iconv", .when(platforms: [.android])),
                 .headerSearchPath("include/libetpan"),
                 .headerSearchPath("src"),
                 .headerSearchPath("src/data-types"),
@@ -184,7 +184,7 @@ let package = Package(
                 .headerSearchPath("src/driver/implementation/pop3"),
                 .headerSearchPath("src/driver/interface"),
                 .headerSearchPath("src/driver/tools"),
-                .define("HAVE_ICONV", to: "1"),
+                .define("HAVE_ICONV", to: "1", .when(platforms: [.iOS, .macOS])),
                 .define("HAVE_CONFIG_H", to: "1")
             ],
             linkerSettings: [
@@ -192,6 +192,8 @@ let package = Package(
                 .linkedLibrary("crypto", .when(platforms: [.android])),
                 .linkedLibrary("ssl", .when(platforms: [.android])),
                 .linkedLibrary("z"),
+                .linkedLibrary("iconv", .when(platforms: [.iOS, .macOS])),
+                .linkedLibrary("sasl2", .when(platforms: [.macOS])),
             ]
         ),
         .target(name: "option-parser", dependencies: ["etpan"], path: "tests", sources: ["option-parser.c"]),
