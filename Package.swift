@@ -177,7 +177,7 @@ var targets: [Target] = [
     .executableTarget(name: "readmsg-simple", dependencies: ["etpan", "option-parser", "readmsg-common"], path: "tests", sources: ["readmsg-simple.c"]),
 ]
 
-#if !canImport(Darwin)
+#if TARGET_ANDROID
 targets += [
     .target(
         name: "iconv",
