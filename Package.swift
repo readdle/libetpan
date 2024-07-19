@@ -4,6 +4,8 @@
 import Foundation
 import PackageDescription
 
+var targets: [Target] = []
+
 var products: [Product] = [
     .library(name: "sasl2", type: .static, targets: ["sasl2"]),
     .library(name: "etpan", type: .static, targets: ["etpan"]),
@@ -24,7 +26,45 @@ var etpanDependencies: [Target.Dependency] = [
     .target(name: "sasl2", condition: .when(platforms: [.android, .iOS])),
 ]
 
-var targets: [Target] = [
+#if TARGET_ANDROID
+targets += [
+    .target(
+        name: "iconv",
+        path: "dependencies/iconv",
+        sources: [
+            "libiconv/libcharset/lib/localcharset.c",
+            "libiconv/lib/iconv.c",
+            "libiconv/lib/relocatable.c"
+        ],
+        cSettings: [
+            .headerSearchPath("libiconv/libcharset"),
+            .headerSearchPath("libiconv/libcharset/include"),
+            .headerSearchPath("libiconv/srclib"),
+            .headerSearchPath("libiconv/lib"),
+            .headerSearchPath("config/macos", .when(platforms: [.iOS])),
+            .headerSearchPath("config/ios", .when(platforms: [.macOS])),
+            .headerSearchPath("config/android", .when(platforms: [.android])),
+            .define("ANDROID", .when(platforms: [.android])),
+            .define("LIBDIR", to: "\"\""),
+            .define("BUILDING_LIBICONV"),
+            .define("IN_LIBRARY"),
+            .unsafeFlags([
+                "-Wno-parentheses-equality",
+            ])
+        ]
+    ),
+]
+
+products += [
+    .library(name: "iconv", type: .static, targets: ["iconv"]),
+]
+
+etpanDependencies += [
+    .target(name: "iconv", condition: .when(platforms: [.android])),
+]
+#endif
+
+targets += [
     .target(
         name: "sasl2",
         dependencies: [
@@ -176,44 +216,6 @@ var targets: [Target] = [
     .executableTarget(name: "readmsg", dependencies: ["etpan", "option-parser", "readmsg-common"], path: "tests", sources: ["readmsg.c"]),
     .executableTarget(name: "readmsg-simple", dependencies: ["etpan", "option-parser", "readmsg-common"], path: "tests", sources: ["readmsg-simple.c"]),
 ]
-
-#if TARGET_ANDROID
-targets += [
-    .target(
-        name: "iconv",
-        path: "dependencies/iconv",
-        sources: [
-            "libiconv/libcharset/lib/localcharset.c",
-            "libiconv/lib/iconv.c",
-            "libiconv/lib/relocatable.c"
-        ],
-        cSettings: [
-            .headerSearchPath("libiconv/libcharset"),
-            .headerSearchPath("libiconv/libcharset/include"),
-            .headerSearchPath("libiconv/srclib"),
-            .headerSearchPath("libiconv/lib"),
-            .headerSearchPath("config/macos", .when(platforms: [.iOS])),
-            .headerSearchPath("config/ios", .when(platforms: [.macOS])),
-            .headerSearchPath("config/android", .when(platforms: [.android])),
-            .define("ANDROID", .when(platforms: [.android])),
-            .define("LIBDIR", to: "\"\""),
-            .define("BUILDING_LIBICONV"),
-            .define("IN_LIBRARY"),
-            .unsafeFlags([
-                "-Wno-parentheses-equality",
-            ])
-        ]
-    ),
-]
-
-packages += [
-    .library(name: "iconv", type: .static, targets: ["iconv"]),
-]
-
-etpanDependencies += [
-    .target(name: "iconv", condition: .when(platforms: [.android])),
-]
-#endif
 
 let package = Package(
     name: "etpan",
