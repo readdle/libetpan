@@ -218,6 +218,13 @@ if targetPlatform == .android || targetPlatform == .iOS {
             "cyrus-sasl/plugins/srp.c"
         ])
     }
+    if targetPlatform == .iOS {
+        saslSources.append(contentsOf: [
+            "cyrus-sasl/sasldb/db_ndbm.c",
+            "cyrus-sasl/sasldb/allockey.c",
+            "cyrus-sasl/plugins/sasldb.c",
+        ])
+    }
     
     package.targets.append(contentsOf: [
         .target(
