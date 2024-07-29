@@ -179,7 +179,7 @@
 #define USE_SASL 1
 
 /* Define to use OpenSSL */
-#define USE_SSL 1
+/* #undef USE_SSL */
 
 /* Version number of package */
 #define VERSION "1.9.4"

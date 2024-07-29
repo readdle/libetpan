@@ -189,7 +189,7 @@
 /* #undef HAVE_KRB */
 
 /* Define to 1 if you have the <krb5.h> header file. */
-#define HAVE_KRB5_H 1
+/* #undef HAVE_KRB5_H */
 
 /* Define to 1 if you have the `krb_get_err_text' function. */
 /* #undef HAVE_KRB_GET_ERR_TEXT */
@@ -231,13 +231,13 @@
 /* #undef HAVE_NDIR_H */
 
 /* Do we have OpenSSL? */
-#define HAVE_OPENSSL /**/
+/* #undef HAVE_OPENSSL */
 
 /* Use OPIE for server-side OTP? */
 /* #undef HAVE_OPIE */
 
 /* Support for PAM? */
-#define HAVE_PAM /**/
+/* #undef HAVE_PAM */
 
 /* Define to 1 if you have the <paths.h> header file. */
 #define HAVE_PATHS_H 1
@@ -255,7 +255,7 @@
 #define HAVE_SELECT 1
 
 /* Do we have SHA512? */
-#define HAVE_SHA512 /**/
+/* #undef HAVE_SHA512 */
 
 /* Include SIA Support */
 /* #undef HAVE_SIA */
@@ -437,7 +437,7 @@
 /* #undef SASL_LMDB */
 
 /* Use NDBM for SASLdb */
-/* #undef SASL_NDBM */
+#define SASL_NDBM /**/
 
 /* The size of `long', as computed by sizeof. */
 #define SIZEOF_LONG 8
@@ -449,7 +449,7 @@
 #define STATIC_CRAMMD5 /**/
 
 /* Link DIGEST-MD5 Statically */
-#define STATIC_DIGESTMD5 /**/
+/* #undef STATIC_DIGESTMD5 */
 
 /* Link GSSAPI Statically */
 /* #undef STATIC_GSSAPIV2 */
@@ -464,10 +464,10 @@
 #define STATIC_LOGIN /**/
 
 /* Link NTLM Statically */
-#define STATIC_NTLM /**/
+/* #undef STATIC_NTLM */
 
 /* Link OTP Statically */
-#define STATIC_OTP /**/
+/* #undef STATIC_OTP */
 
 /* Link PASSDSS Statically */
 /* #undef STATIC_PASSDSS */
@@ -476,10 +476,10 @@
 #define STATIC_PLAIN /**/
 
 /* Link SASLdb Staticly */
-/* #undef STATIC_SASLDB */
+#define STATIC_SASLDB /**/
 
 /* Link SCRAM Statically */
-#define STATIC_SCRAM /**/
+/* #undef STATIC_SCRAM */
 
 /* Link SQL plugin statically */
 /* #undef STATIC_SQL */
@@ -522,7 +522,7 @@
 #define VERSION "2.1.28"
 
 /* Use DES */
-#define WITH_DES /**/
+/* #undef WITH_DES */
 
 /* Linking against dmalloc? */
 /* #undef WITH_DMALLOC */
@@ -531,7 +531,7 @@
 #define WITH_RC4 /**/
 
 /* Use OpenSSL DES Implementation */
-#define WITH_SSL_DES /**/
+/* #undef WITH_SSL_DES */
 
 /* Define to 1 if on MINIX. */
 /* #undef _MINIX */
