@@ -68,7 +68,6 @@ var etpan: Target = .target(
         .headerSearchPath("config/macos", .when(platforms: [.macOS])),
         .headerSearchPath("config/ios", .when(platforms: [.iOS])),
         .headerSearchPath("config/android", .when(platforms: [.android])),
-        .headerSearchPath("dependencies/include/iconv", .when(platforms: [.android])),
         .headerSearchPath("include/libetpan"),
         .headerSearchPath("src"),
         .headerSearchPath("src/data-types"),
@@ -101,16 +100,9 @@ var etpan: Target = .target(
         .linkedLibrary("crypto", .when(platforms: [.android])),
         .linkedLibrary("ssl", .when(platforms: [.android])),
         .linkedLibrary("z"),
-        .linkedLibrary("iconv", .when(platforms: [.iOS, .macOS])),
         .linkedLibrary("sasl2", .when(platforms: [.macOS])),
     ]
 )
-
-if targetPlatform == .android {
-    etpan.dependencies.append(contentsOf: [
-        .target(name: "iconv", condition: .when(platforms: [.android])),
-    ])
-}
 
 if targetPlatform == .android || targetPlatform == .iOS {
     etpan.dependencies.append(contentsOf: [
@@ -155,34 +147,6 @@ var package = Package(
         .executableTarget(name: "readmsg-simple", dependencies: ["etpan", "option-parser", "readmsg-common"], path: "tests", sources: ["readmsg-simple.c"]),
     ]
 )
-
-if targetPlatform == .android {
-    package.targets.append(contentsOf: [
-        .target(
-            name: "iconv",
-            path: "dependencies/iconv",
-            sources: [
-                "libiconv/libcharset/lib/localcharset.c",
-                "libiconv/lib/iconv.c",
-                "libiconv/lib/relocatable.c"
-            ],
-            cSettings: [
-                .headerSearchPath("libiconv/libcharset"),
-                .headerSearchPath("libiconv/libcharset/include"),
-                .headerSearchPath("libiconv/srclib"),
-                .headerSearchPath("libiconv/lib"),
-                .headerSearchPath("config/android"),
-                .define("ANDROID"),
-                .define("LIBDIR", to: "\"\""),
-                .define("BUILDING_LIBICONV"),
-                .define("IN_LIBRARY"),
-                .unsafeFlags([
-                    "-Wno-parentheses-equality",
-                ])
-            ]
-        ),
-    ])
-}
 
 if targetPlatform == .android || targetPlatform == .iOS {
     var saslSources: [String] = [

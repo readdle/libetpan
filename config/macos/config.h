@@ -35,7 +35,7 @@
 #define HAVE_GETPAGESIZE 1
 
 /* Define if you have the iconv() function. */
-#define HAVE_ICONV 1
+/* #undef HAVE_ICONV */
 
 /* prototype of iconv() has const parameters */
 /* #undef HAVE_ICONV_PROTO_CONST */
