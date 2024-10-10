@@ -39,7 +39,6 @@ xcuserdata/
 /doc/Makefile.in
 /include/Makefile
 /include/Makefile.in
-/include/libetpan/
 /install-sh
 /libetpan-config
 /libtool
@@ -161,3 +160,5 @@ third-party
 /build-windows/.vs/libetpan/v15
 libetpan-config.in
 iconv-android-1.zip
+Package.resolved
+.build-ios
