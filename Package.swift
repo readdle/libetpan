@@ -179,9 +179,6 @@ var package = Package(
                 .define("GCC_FALLTHROUGH", to: "/* fall through */"),
                 .define("PLUGINDIR", to: "\"/usr/lib/sasl2\""),
                 .define("CONFIGDIR", to: "\"/usr/lib/sasl2:/etc/sasl2\""),
-                .unsafeFlags([
-                    "-Wno-parentheses-equality"
-                ]),
             ]
         ),
     ]
