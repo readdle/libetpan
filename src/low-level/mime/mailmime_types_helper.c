@@ -197,10 +197,13 @@ mailmime_fields_new_with_data(struct mailmime_mechanism * encoding,
       goto free;
     }
 
+    char *attachmentId = strdup(id);
     field = mailmime_field_new(MAILMIME_FIELD_ATTACHMENT_ID,
-             NULL, NULL, strdup(id), NULL, 0, NULL, NULL, NULL);
-    if (field == NULL)
+             NULL, NULL, attachmentId, NULL, 0, NULL, NULL, NULL);
+    if (field == NULL) {
+      free(attachmentId);
       goto free;
+    }
 
     r = mailmime_fields_add(fields, field);
     if (r != MAILIMF_NO_ERROR) {
