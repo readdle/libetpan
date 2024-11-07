@@ -141,11 +141,11 @@ static void mailmime_field_detach(struct mailmime_field * field)
 
 struct mailmime_fields *
 mailmime_fields_new_with_data(struct mailmime_mechanism * encoding,
-			      char * id,
-			      char * description,
-			      struct mailmime_disposition * disposition,
-			      struct mailmime_language * language,
-            int useAdditionalHeaders)
+                              char * id,
+                              char * description,
+                              struct mailmime_disposition * disposition,
+                              struct mailmime_language * language,
+                              int useAdditionalHeaders)
 {
   struct mailmime_field * field;
   struct mailmime_fields * fields;

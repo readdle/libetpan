@@ -60,11 +60,11 @@ int mailmime_fields_add(struct mailmime_fields * fields,
 LIBETPAN_EXPORT
 struct mailmime_fields *
 mailmime_fields_new_with_data(struct mailmime_mechanism * encoding,
-			      char * id,
-			      char * description,
-			      struct mailmime_disposition * disposition,
-			      struct mailmime_language * language,
-                  int useAdditionalHeaders);
+                              char * id,
+                              char * description,
+                              struct mailmime_disposition * disposition,
+                              struct mailmime_language * language,
+                              int useAdditionalHeaders);
 
 LIBETPAN_EXPORT
 struct mailmime_fields *
