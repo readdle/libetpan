@@ -124,6 +124,9 @@ static void mailmime_field_detach(struct mailmime_field * field)
   case MAILMIME_FIELD_ID:
     field->fld_data.fld_id = NULL;
     break;
+  case MAILMIME_FIELD_ATTACHMENT_ID:
+    field->fld_data.fld_attachment_id = NULL;
+    break;
   case MAILMIME_FIELD_DESCRIPTION:
     field->fld_data.fld_description = NULL;
     break;
@@ -184,6 +187,18 @@ mailmime_fields_new_with_data(struct mailmime_mechanism * encoding,
   if (id != NULL) {
     field = mailmime_field_new(MAILMIME_FIELD_ID,
 			       NULL, NULL, id, NULL, 0, NULL, NULL, NULL);
+    if (field == NULL)
+      goto free;
+
+    r = mailmime_fields_add(fields, field);
+    if (r != MAILIMF_NO_ERROR) {
+      mailmime_field_detach(field);
+      mailmime_field_free(field);
+      goto free;
+    }
+
+    field = mailmime_field_new(MAILMIME_FIELD_ATTACHMENT_ID,
+             NULL, NULL, strdup(id), NULL, 0, NULL, NULL, NULL);
     if (field == NULL)
       goto free;
 
