@@ -571,7 +571,7 @@ mailprivacy_new_file_part(struct mailprivacy * privacy,
   }
   
   mime_fields = mailmime_fields_new_with_data(encoding,
-      NULL, NULL, NULL, NULL);
+      NULL, NULL, NULL, NULL, 0);
   if (mime_fields == NULL) {
     goto free_content;
   }

@@ -124,6 +124,9 @@ static void mailmime_field_detach(struct mailmime_field * field)
   case MAILMIME_FIELD_ID:
     field->fld_data.fld_id = NULL;
     break;
+  case MAILMIME_FIELD_ATTACHMENT_ID:
+    field->fld_data.fld_attachment_id = NULL;
+    break;
   case MAILMIME_FIELD_DESCRIPTION:
     field->fld_data.fld_description = NULL;
     break;
@@ -138,10 +141,11 @@ static void mailmime_field_detach(struct mailmime_field * field)
 
 struct mailmime_fields *
 mailmime_fields_new_with_data(struct mailmime_mechanism * encoding,
-			      char * id,
-			      char * description,
-			      struct mailmime_disposition * disposition,
-			      struct mailmime_language * language)
+                              char * id,
+                              char * description,
+                              struct mailmime_disposition * disposition,
+                              struct mailmime_language * language,
+                              int useAdditionalHeaders)
 {
   struct mailmime_field * field;
   struct mailmime_fields * fields;
@@ -192,6 +196,23 @@ mailmime_fields_new_with_data(struct mailmime_mechanism * encoding,
       mailmime_field_detach(field);
       mailmime_field_free(field);
       goto free;
+    }
+
+    if (useAdditionalHeaders) {
+      char *attachmentId = strdup(id);
+      field = mailmime_field_new(MAILMIME_FIELD_ATTACHMENT_ID,
+                                 NULL, NULL, attachmentId, NULL, 0, NULL, NULL, NULL);
+      if (field == NULL) {
+        free(attachmentId);
+        goto free;
+      }
+      
+      r = mailmime_fields_add(fields, field);
+      if (r != MAILIMF_NO_ERROR) {
+        mailmime_field_detach(field);
+        mailmime_field_free(field);
+        goto free;
+      }
     }
   }
 
@@ -258,7 +279,7 @@ mailmime_fields_new_with_version(struct mailmime_mechanism * encoding,
   int r;
 
   fields = mailmime_fields_new_with_data(encoding, id, description,
-					 disposition, language);
+					 disposition, language, 0);
   if (fields == NULL)
     goto err;
 
@@ -1031,7 +1052,7 @@ struct mailmime_fields * mailmime_fields_new_encoding(int type)
     goto err;
 
   mime_fields = mailmime_fields_new_with_data(encoding,
-      NULL, NULL, NULL, NULL);
+      NULL, NULL, NULL, NULL, 0);
   if (mime_fields == NULL)
     goto free;
 
@@ -1366,7 +1387,7 @@ struct mailmime_fields * mailmime_fields_new_filename(int dsp_type,
     goto free_dsp;
 
   mime_fields = mailmime_fields_new_with_data(encoding,
-			      NULL, NULL, dsp, NULL);
+			      NULL, NULL, dsp, NULL, 0);
   if (mime_fields == NULL)
     goto free_encoding;
 

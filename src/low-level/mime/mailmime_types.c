@@ -286,6 +286,9 @@ mailmime_field_new(int fld_type,
   case MAILMIME_FIELD_ID:
     field->fld_data.fld_id = fld_id;
     break;
+  case MAILMIME_FIELD_ATTACHMENT_ID:
+    field->fld_data.fld_attachment_id = fld_id;
+    break;
   case MAILMIME_FIELD_DESCRIPTION:
     field->fld_data.fld_description = fld_description;
     break;
@@ -319,6 +322,10 @@ void mailmime_field_free(struct mailmime_field * field)
   case MAILMIME_FIELD_ID:
     if (field->fld_data.fld_id != NULL)
       mailmime_id_free(field->fld_data.fld_id);
+    break;
+  case MAILMIME_FIELD_ATTACHMENT_ID:
+      if (field->fld_data.fld_attachment_id != NULL)
+      mailmime_id_free(field->fld_data.fld_attachment_id);
     break;
   case MAILMIME_FIELD_DESCRIPTION:
     if (field->fld_data.fld_description != NULL)

@@ -188,7 +188,7 @@ static struct mailmime * get_text_part(const char * mime_type,
 	disposition = mailmime_disposition_new_with_data(MAILMIME_DISPOSITION_TYPE_INLINE,
 		NULL, NULL, NULL, NULL, (size_t) -1);
 	mime_fields = mailmime_fields_new_with_data(encoding,
-		NULL, NULL, disposition, NULL);
+		NULL, NULL, disposition, NULL, 0);
 
 	content = mailmime_content_new_with_str(mime_type);
 	param = mailmime_param_new_with_data("charset", "utf-8");
@@ -231,7 +231,7 @@ static struct mailmime * get_file_part(const char * filename, const char * mime_
 	encoding_type = MAILMIME_MECHANISM_BASE64;
 	encoding = mailmime_mechanism_new(encoding_type, NULL);
 	mime_fields = mailmime_fields_new_with_data(encoding,
-		NULL, NULL, disposition, NULL);
+		NULL, NULL, disposition, NULL, 0);
 	mime = part_new_empty(content, mime_fields, NULL, 1);
 	mailmime_set_body_text(mime, (char *) text, length);
 	

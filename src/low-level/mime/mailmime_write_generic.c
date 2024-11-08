@@ -74,6 +74,8 @@ static int mailmime_field_write_driver(int (* do_write)(void *, const char *, si
 
 static int mailmime_id_write_driver(int (* do_write)(void *, const char *, size_t), void * data, int * col, char * id);
 
+static int mailmime_attachment_id_write_driver(int (* do_write)(void *, const char *, size_t), void * data, int * col, char * id);
+
 static int mailmime_description_write_driver(int (* do_write)(void *, const char *, size_t), void * data, int * col, char * descr);
 
 static int mailmime_version_write_driver(int (* do_write)(void *, const char *, size_t), void * data, int * col, uint32_t version);
@@ -156,6 +158,10 @@ static int mailmime_field_write_driver(int (* do_write)(void *, const char *, si
     r = mailmime_id_write_driver(do_write, data, col, field->fld_data.fld_id);
     break;
 
+  case MAILMIME_FIELD_ATTACHMENT_ID:
+    r = mailmime_attachment_id_write_driver(do_write, data, col, field->fld_data.fld_attachment_id);
+    break;
+
   case MAILMIME_FIELD_DESCRIPTION:
     r = mailmime_description_write_driver(do_write, data, col, field->fld_data.fld_description);
     break;
@@ -204,6 +210,28 @@ static int mailmime_id_write_driver(int (* do_write)(void *, const char *, size_
     return r;
 
   r = mailimf_string_write_driver(do_write, data, col, ">", 1);
+  if (r != MAILIMF_NO_ERROR)
+    return r;
+
+  r = mailimf_string_write_driver(do_write, data, col, "\r\n", 2);
+  if (r != MAILIMF_NO_ERROR)
+    return r;
+#if 0
+  * col = 0;
+#endif
+  
+  return MAILIMF_NO_ERROR;
+}
+
+static int mailmime_attachment_id_write_driver(int (* do_write)(void *, const char *, size_t), void * data, int * col, char * id)
+{
+  int r;
+
+  r = mailimf_string_write_driver(do_write, data, col, "X-Attachment-Id: ", 17);
+  if (r != MAILIMF_NO_ERROR)
+    return r;
+
+  r = mailimf_string_write_driver(do_write, data, col, id, strlen(id));
   if (r != MAILIMF_NO_ERROR)
     return r;
 

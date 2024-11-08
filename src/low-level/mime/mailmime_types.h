@@ -95,7 +95,8 @@ enum {
   MAILMIME_FIELD_VERSION,
   MAILMIME_FIELD_DISPOSITION,
   MAILMIME_FIELD_LANGUAGE,
-  MAILMIME_FIELD_LOCATION
+  MAILMIME_FIELD_LOCATION,
+  MAILMIME_FIELD_ATTACHMENT_ID
 };
 
 struct mailmime_field {
@@ -109,6 +110,7 @@ struct mailmime_field {
     struct mailmime_disposition * fld_disposition;
     struct mailmime_language * fld_language;
     char * fld_location;
+    char * fld_attachment_id;
   } fld_data;
 };
 
