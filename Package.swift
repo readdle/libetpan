@@ -35,12 +35,37 @@ saslSources.append(contentsOf: [
     "cyrus-sasl/plugins/scram.c",
     "cyrus-sasl/plugins/srp.c"
 ])
+
+let saslTarget = Target.target(
+    name: "sasl2",
+    path: "dependencies/sasl2",
+    sources: saslSources,
+    cSettings: [
+        .headerSearchPath("cyrus-sasl/include"),
+        .headerSearchPath("cyrus-sasl/common"),
+        .headerSearchPath("cyrus-sasl/plugins"),
+        .headerSearchPath("config/ios", .when(platforms: [.iOS])),
+        .headerSearchPath("config/android", .when(platforms: [.android])),
+        .headerSearchPath("include/sasl"),
+        .define("GCC_FALLTHROUGH", to: "/* fall through */"),
+        .define("PLUGINDIR", to: "\"/usr/lib/sasl2\""),
+        .define("CONFIGDIR", to: "\"/usr/lib/sasl2:/etc/sasl2\""),
+        .define("OBSOLETE_CRAM_ATTR", to: "1"),
+        .define("HAVE_CONFIG_H", to: "1")
+    ]
+)
 #else
 saslSources.append(contentsOf: [
     "cyrus-sasl/sasldb/db_ndbm.c",
     "cyrus-sasl/sasldb/allockey.c",
     "cyrus-sasl/plugins/sasldb.c",
 ])
+
+let saslTarget = Target.binaryTarget(
+    name: "sasl2",
+    url: "https://github.com/readdle/libetpan/releases/download/1.9.3-readdle.6/libsasl-2.1.27-ios.xcframework.zip",
+    checksum: "c4bdcdc71190930a8454d553367b5ed486123e023901046ff2897efa95413310"
+)
 #endif
 
 var package = Package(
@@ -165,21 +190,6 @@ var package = Package(
         .executableTarget(name: "fetch-attachment", dependencies: ["etpan", "option-parser", "readmsg-common"], path: "tests", sources: ["fetch-attachment.c"]),
         .executableTarget(name: "readmsg", dependencies: ["etpan", "option-parser", "readmsg-common"], path: "tests", sources: ["readmsg.c"]),
         .executableTarget(name: "readmsg-simple", dependencies: ["etpan", "option-parser", "readmsg-common"], path: "tests", sources: ["readmsg-simple.c"]),
-        .target(
-            name: "sasl2",
-            path: "dependencies/sasl2",
-            sources: saslSources,
-            cSettings: [
-                .headerSearchPath("cyrus-sasl/include"),
-                .headerSearchPath("cyrus-sasl/common"),
-                .headerSearchPath("cyrus-sasl/plugins"),
-                .headerSearchPath("config/ios", .when(platforms: [.iOS])),
-                .headerSearchPath("config/android", .when(platforms: [.android])),
-                .headerSearchPath("include/sasl"),
-                .define("GCC_FALLTHROUGH", to: "/* fall through */"),
-                .define("PLUGINDIR", to: "\"/usr/lib/sasl2\""),
-                .define("CONFIGDIR", to: "\"/usr/lib/sasl2:/etc/sasl2\""),
-            ]
-        ),
+        saslTarget,
     ]
 )
