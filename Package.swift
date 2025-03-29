@@ -174,6 +174,7 @@ var package = Package(
                 .linkedLibrary("crypto", .when(platforms: [.android])),
                 .linkedLibrary("ssl", .when(platforms: [.android])),
                 .linkedLibrary("sasl2", .when(platforms: [.macOS])),
+                .linkedLibrary("iconv", .when(platforms: [.iOS])),
                 .linkedLibrary("z"),
             ]
         ),
