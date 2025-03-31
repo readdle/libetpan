@@ -8,7 +8,7 @@
 #endif
 
 /* Define to detected Berkeley DB major version number */
-#define DBVERS 0
+#define DBVERS 1
 
 /* Define to 1 if you have the <arpa/inet.h> header file. */
 #define HAVE_ARPA_INET_H 1
@@ -35,7 +35,7 @@
 #define HAVE_GETPAGESIZE 1
 
 /* Define if you have the iconv() function. */
-/* #undef HAVE_ICONV */
+#define HAVE_ICONV 1
 
 /* prototype of iconv() has const parameters */
 /* #undef HAVE_ICONV_PROTO_CONST */
@@ -97,9 +97,6 @@
 /* Define to 1 if you have the <sys/param.h> header file. */
 #define HAVE_SYS_PARAM_H 1
 
-/* Define to 1 if you have the <sys/poll.h> header file. */
-#define HAVE_SYS_POLL_H 1
-
 /* Define to 1 if you have the <sys/select.h> header file. */
 #define HAVE_SYS_SELECT_H 1
 
@@ -136,9 +133,6 @@
 /* Define this to the minor version of libEtPan */
 #define LIBETPAN_VERSION_MINOR 9
 
-/* Enable support for lmdb cache */
-/* #undef LMDB */
-
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"
 
@@ -171,9 +165,6 @@
 
 /* Define to use GnuTLS */
 /* #undef USE_GNUTLS */
-
-/* use poll instead of select */
-#define USE_POLL 1
 
 /* Define to use SASL */
 #define USE_SASL 1
