@@ -37,15 +37,15 @@
 
 #define MAILSMTP_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/mailsmtp_types.h>
 #include <libetpan/mailsmtp_helper.h>
 #include <libetpan/mailsmtp_socket.h>
 #include <libetpan/mailsmtp_ssl.h>
 #include <libetpan/mailsmtp_oauth2.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 LIBETPAN_EXPORT

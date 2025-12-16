@@ -38,6 +38,10 @@
 #include <libetpan/clist.h>
 #include <libetpan/qresync_types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 LIBETPAN_EXPORT
 extern struct mailimap_extension_api mailimap_extension_qresync;
 
@@ -71,5 +75,9 @@ int mailimap_uid_fetch_qresync(mailimap * session,
 
 LIBETPAN_EXPORT
 int mailimap_has_qresync(mailimap * session);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

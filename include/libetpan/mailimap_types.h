@@ -502,10 +502,6 @@
 
 #define MAILIMAP_TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/libetpan-config.h>
 #include <libetpan/mailstream.h>
 #include <libetpan/clist.h>
@@ -544,6 +540,12 @@ extern "C" {
   of a group, the next addresses in the list are elements of the group
   until we reach an address with a NULL mailbox_name.
 */
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 struct mailimap_address {
   char * ad_personal_name; /* can be NULL */

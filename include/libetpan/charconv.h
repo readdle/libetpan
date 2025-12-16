@@ -37,15 +37,17 @@
 
 #define CHARCONV_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <sys/types.h>
 
 #ifndef LIBETPAN_CONFIG_H
 #	include <libetpan/libetpan-config.h>
 #endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 enum {
   MAIL_CHARCONV_NO_ERROR = 0,

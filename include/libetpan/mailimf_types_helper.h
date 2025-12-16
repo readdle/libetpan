@@ -37,11 +37,11 @@
 
 #define MAILIMF_TYPES_HELPER
 
+#include <libetpan/mailimf_types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <libetpan/mailimf_types.h>
 
 /*
   IMPORTANT NOTE:

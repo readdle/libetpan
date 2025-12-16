@@ -37,16 +37,17 @@
 
 #define NEWSNNTP_SSL_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <sys/types.h>
+
 #ifdef HAVE_INTTYPES_H
 #	include <inttypes.h>
 #endif
 
 #include <libetpan/newsnntp_types.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 LIBETPAN_EXPORT
 int newsnntp_ssl_connect(newsnntp * f, const char * server, uint16_t port);

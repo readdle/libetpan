@@ -37,12 +37,12 @@
 
 #define MAILTHREAD_TYPES_H
 
+#include <libetpan/maildriver_types.h>
+#include <libetpan/mailmessage_types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <libetpan/maildriver_types.h>
-#include <libetpan/mailmessage_types.h>
 
 /*
   This is the type of tree construction to apply.

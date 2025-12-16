@@ -37,10 +37,6 @@
 
 #define MAILMBOX_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/mailmbox_types.h>
 
 int
@@ -55,6 +51,10 @@ int
 mailmbox_append_message_uid(struct mailmbox_folder * folder,
     const char * data, size_t len, unsigned int * puid);
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 int mailmbox_fetch_msg(struct mailmbox_folder * folder,
 		       uint32_t num, char ** result,
 		       size_t * result_len);

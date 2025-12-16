@@ -37,15 +37,15 @@
 
 #define MAILSTREAM_TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #define LIBETPAN_MAILSTREAM_DEBUG
 #ifndef LIBETPAN_CONFIG_H
 #  include <libetpan/libetpan-config.h>
 #endif
 #include <libetpan/carray.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 struct _mailstream;
 

@@ -37,15 +37,15 @@
 
 #define MAILIMF_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/mailimf_types.h>
 #include <libetpan/mailimf_write_generic.h>
 #include <libetpan/mailimf_write_file.h>
 #include <libetpan/mailimf_write_mem.h>
 #include <libetpan/mailimf_types_helper.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifdef HAVE_INTTYPES_H
 #	include <inttypes.h>

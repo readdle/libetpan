@@ -37,11 +37,11 @@
 
 #define MAILMIME_DECODE_H
 
+#include <libetpan/mailmime_types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <libetpan/mailmime_types.h>
 
 LIBETPAN_EXPORT
 int mailmime_encoded_phrase_parse(const char * default_fromcode,

@@ -37,15 +37,17 @@
 
 #define MAILPOP3_TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/libetpan-config.h>
 #include <libetpan/mailstream.h>
 #include <libetpan/mmapstring.h>
 #include <libetpan/carray.h>
 #include <libetpan/clist.h>
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 enum {
   MAILPOP3_NO_ERROR = 0,

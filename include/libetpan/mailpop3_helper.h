@@ -37,11 +37,13 @@
 
 #define MAILPOP3_HELPER_H
 
+#include "mailpop3.h"
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "mailpop3.h"
 
 int mailpop3_login_apop(mailpop3 * f,
 			 const char * user,

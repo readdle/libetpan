@@ -37,13 +37,13 @@
 
 #define MAILSMTP_SOCKET_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/libetpan-config.h>
 #include <libetpan/mailsmtp_types.h>
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 LIBETPAN_EXPORT
 int mailsmtp_socket_connect(mailsmtp * session,
     const char * server, uint16_t port);

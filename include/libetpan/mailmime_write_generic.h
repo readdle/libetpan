@@ -37,12 +37,12 @@
 
 #define  MAILMIME_WRITE_GENERIC_H
 
+#include <libetpan/mailmime_types.h>
+#include <stdio.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <libetpan/mailmime_types.h>
-#include <stdio.h>
 
 int mailmime_fields_write_driver(int (* do_write)(void *, const char *, size_t), void * data, int * col,
 			  struct mailmime_fields * fields);

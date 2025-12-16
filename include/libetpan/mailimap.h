@@ -37,10 +37,6 @@
 
 #define MAILIMAP_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/mailimap_types.h>
 #include <libetpan/mailimap_types_helper.h>
 #include <libetpan/mailimap_helper.h>
@@ -54,6 +50,7 @@ extern "C" {
 #include <libetpan/idle.h>
 #include <libetpan/quota.h>
 #include <libetpan/namespace.h>
+
 #include <libetpan/mailimap_id.h>
 #include <libetpan/enable.h>
 #include <libetpan/xlist.h>
@@ -84,6 +81,11 @@ extern "C" {
   use mailimap_login() to authenticate, else
   MAILIMAP_NO_ERROR_AUTHENTICATED is returned.
 */
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 LIBETPAN_EXPORT
 int mailimap_connect(mailimap * session, mailstream * s);

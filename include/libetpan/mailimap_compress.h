@@ -35,6 +35,10 @@
 
 #include <libetpan/mailimap_types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
    mailimap_compress()
 
@@ -64,5 +68,9 @@ int mailimap_compress(mailimap * session);
 
 LIBETPAN_EXPORT
 int mailimap_has_compress_deflate(mailimap * session);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

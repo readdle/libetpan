@@ -37,12 +37,12 @@
 
 #define MAILIMF_WRITE_H
 
+#include <stdio.h>
+#include <libetpan/mailimf_types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <stdio.h>
-#include <libetpan/mailimf_types.h>
 
 #define MAILIMF_WRITE_COMPATIBILITY
 

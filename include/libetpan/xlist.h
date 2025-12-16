@@ -33,12 +33,14 @@
 
 #define XLIST_H
 
+#include <libetpan/libetpan-config.h>
+#include <libetpan/mailimap_extension.h>
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
   
-#include <libetpan/libetpan-config.h>
-#include <libetpan/mailimap_extension.h>
 
 LIBETPAN_EXPORT
 extern struct mailimap_extension_api mailimap_extension_xlist;

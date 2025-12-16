@@ -37,11 +37,11 @@
 
 #define IMAPDRIVER_H
 
+#include <libetpan/imapdriver_types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <libetpan/imapdriver_types.h>
 
 extern mailsession_driver * imap_session_driver;
 

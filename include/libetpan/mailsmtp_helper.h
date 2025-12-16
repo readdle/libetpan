@@ -37,15 +37,15 @@
 
 #define MAILSMTP_HELPER_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/libetpan-config.h>
 
 #include "mailsmtp_types.h"
 #include "clist.h"
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 LIBETPAN_EXPORT
 int mailsmtp_init(mailsmtp * session);
 

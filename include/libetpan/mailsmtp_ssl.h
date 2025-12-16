@@ -37,15 +37,15 @@
 
 #define MAILSMTP_SSL_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifdef HAVE_INTTYPES_H
 #	include <inttypes.h>
 #endif
 
 #include <libetpan/mailsmtp_types.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 LIBETPAN_EXPORT
 int mailsmtp_ssl_connect(mailsmtp * session,

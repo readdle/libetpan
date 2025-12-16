@@ -33,12 +33,12 @@
 
 #define MAILIMAP_EXTENSION_H
 
+#include <libetpan/mailimap_types.h>
+#include <libetpan/mailimap_extension_types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <libetpan/mailimap_types.h>
-#include <libetpan/mailimap_extension_types.h>
 
 /*
   you add a (static) mailimap_extension_api to the list of extensions

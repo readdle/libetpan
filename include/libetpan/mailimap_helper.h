@@ -37,11 +37,13 @@
 
 #define MAILIMAP_HELPER_H
 
+#include <libetpan/mailimap_types.h>
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <libetpan/mailimap_types.h>
 
 LIBETPAN_EXPORT
 int mailimap_fetch_rfc822(mailimap * session,

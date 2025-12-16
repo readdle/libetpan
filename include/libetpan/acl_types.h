@@ -33,10 +33,6 @@
 
 #define ACL_TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/libetpan-config.h>
 #include <libetpan/mailstream.h>
 #include <libetpan/clist.h>
@@ -99,6 +95,12 @@ extern "C" {
   only need to recognize types that can be "embedded" into main
   IMAPrev1 types.
 */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 enum {
   MAILIMAP_ACL_TYPE_ACL_DATA,                   /* child of mailbox-data  */
   MAILIMAP_ACL_TYPE_LISTRIGHTS_DATA,            /* child of mailbox-data  */

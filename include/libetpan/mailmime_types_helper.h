@@ -37,11 +37,11 @@
 
 #define MAILMIME_TYPES_HELPER_H
 
+#include <libetpan/mailmime_types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <libetpan/mailmime_types.h>
 
 LIBETPAN_EXPORT
 int mailmime_transfer_encoding_get(struct mailmime_fields * fields);
