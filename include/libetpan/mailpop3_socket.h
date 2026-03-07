@@ -37,15 +37,15 @@
 
 #define MAILPOP3_SOCKET_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifdef HAVE_INTTYPES_H
 #	include <inttypes.h>
 #endif
 
 #include <libetpan/mailpop3_types.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 LIBETPAN_EXPORT
 int mailpop3_socket_connect(mailpop3 * f, const char * server, uint16_t port);

@@ -37,15 +37,17 @@
 
 #define NEWSNNTP_TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/libetpan-config.h>
 #include <libetpan/clist.h>
 
 #include <libetpan/mailstream.h>
 #include <libetpan/mmapstring.h>
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 enum {
   NEWSNNTP_NO_ERROR = 0,

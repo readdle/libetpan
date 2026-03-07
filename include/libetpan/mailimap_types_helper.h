@@ -37,10 +37,6 @@
 
 #define MAILIMAP_TYPES_HELPER_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/mailimap_types.h>
 
 /*
@@ -58,6 +54,12 @@ extern "C" {
   this function creates a new set item with a single message
   given by indx
 */
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 LIBETPAN_EXPORT
 struct mailimap_set_item * mailimap_set_item_new_single(uint32_t indx);

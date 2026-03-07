@@ -33,15 +33,15 @@
 
 #define MAILIMAP_SORT_TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-  
 #ifndef WIN32
 #include <inttypes.h>
 #endif
   
 #include "mailimap_types.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
   
   /* this is the condition of the SORT operation */
   

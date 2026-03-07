@@ -33,13 +33,15 @@
 
 #define CONDSTORE_H
 
+#include <libetpan/libetpan-config.h>
+#include <libetpan/mailimap_extension.h>
+#include <libetpan/condstore_types.h>
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
   
-#include <libetpan/libetpan-config.h>
-#include <libetpan/mailimap_extension.h>
-#include <libetpan/condstore_types.h>
 
 LIBETPAN_EXPORT
 extern struct mailimap_extension_api mailimap_extension_condstore;

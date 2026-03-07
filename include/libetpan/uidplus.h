@@ -32,13 +32,15 @@
 
 #define UIDPLUS_H
 
+#include <libetpan/libetpan-config.h>
+#include <libetpan/mailimap_types.h>
+#include <libetpan/uidplus_types.h>
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <libetpan/libetpan-config.h>
-#include <libetpan/mailimap_types.h>
-#include <libetpan/uidplus_types.h>
 
 LIBETPAN_EXPORT
 extern struct mailimap_extension_api mailimap_extension_uidplus;

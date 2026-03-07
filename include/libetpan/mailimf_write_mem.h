@@ -37,13 +37,13 @@
 
 #define MAILIMF_WRITE_MEM_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdio.h>
 #include <libetpan/mailimf_types.h>
 #include <libetpan/mmapstring.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
   
 /*
   mailimf_string_write_mem appends a string to a given string

@@ -37,13 +37,13 @@
 
 #define MAILSMTP_TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/mailstream.h>
 #include <libetpan/mmapstring.h>
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 enum {
   MAILSMTP_NO_ERROR = 0,
   MAILSMTP_ERROR_UNEXPECTED_CODE,

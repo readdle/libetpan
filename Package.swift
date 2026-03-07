@@ -29,7 +29,7 @@ var saslSources: [String] = [
 
 let saslTarget: Target
 
-if ProcessInfo.processInfo.environment["BUILD_ANDROID"] != nil {
+#if TARGET_ANDROID
     saslSources.append(contentsOf: [
         "cyrus-sasl/plugins/digestmd5.c",
         "cyrus-sasl/plugins/ntlm.c",
@@ -57,8 +57,7 @@ if ProcessInfo.processInfo.environment["BUILD_ANDROID"] != nil {
             .define("HAVE_CONFIG_H", to: "1")
         ]
     )
-}
-else {
+#else
     saslSources.append(contentsOf: [
         "cyrus-sasl/sasldb/db_ndbm.c",
         "cyrus-sasl/sasldb/allockey.c",
@@ -70,7 +69,7 @@ else {
         url: "https://github.com/readdle/libetpan/releases/download/1.9.3-readdle.6/libsasl-2.1.27-ios.xcframework.zip",
         checksum: "c4bdcdc71190930a8454d553367b5ed486123e023901046ff2897efa95413310"
     )
-}
+#endif
 
 var package = Package(
     name: "etpan",

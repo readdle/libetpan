@@ -32,11 +32,13 @@
 
 #define MAILIMAP_IDLE_H
 
+#include "mailimap_types.h"
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "mailimap_types.h"
 
 LIBETPAN_EXPORT
 int mailimap_idle(mailimap * session);

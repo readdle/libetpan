@@ -37,15 +37,15 @@
 
 #define MAILIMAP_SOCKET_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifdef HAVE_INTTYPES_H
 #	include <inttypes.h>
 #endif
 
 #include <libetpan/mailimap_types.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 LIBETPAN_EXPORT
 int mailimap_socket_connect_voip(mailimap * f, const char * server, uint16_t port, int voip_enabled);

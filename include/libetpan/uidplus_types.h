@@ -32,15 +32,15 @@
 
 #define UIDPLUS_TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifndef WIN32 
 #include <inttypes.h>
 #endif
 
 #include "mailimap_types.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 enum {
   MAILIMAP_UIDPLUS_RESP_CODE_APND,

@@ -37,11 +37,13 @@
 
 #define HOTMAILSTORAGE_H
 
+#include "mailstorage_types.h"
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "mailstorage_types.h"
 
 LIBETPAN_EXPORT
 int hotmail_mailstorage_init(struct mailstorage * storage,

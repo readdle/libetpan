@@ -37,10 +37,6 @@
 
 #define MAILMIME_TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifndef LIBETPAN_CONFIG_H
 #	include <libetpan/libetpan-config.h>
 #endif
@@ -50,6 +46,10 @@ extern "C" {
 #endif
 #include <libetpan/mailimf.h>
 #include <libetpan/clist.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 enum {
   MAILMIME_COMPOSITE_TYPE_ERROR,

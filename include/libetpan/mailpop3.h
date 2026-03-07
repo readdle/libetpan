@@ -37,16 +37,18 @@
 
 #define MAILPOP3_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/mailpop3_types.h>
 
 #include <libetpan/mailpop3_helper.h>
 
 #include <libetpan/mailpop3_socket.h>
 #include <libetpan/mailpop3_ssl.h>
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 #define POP3_STRING_SIZE 513
 

@@ -35,6 +35,10 @@
 
 #include <libetpan/clist.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum {
   MAILIMAP_NAMESPACE_TYPE_NAMESPACE
 };
@@ -89,5 +93,9 @@ mailimap_namespace_data_new(struct mailimap_namespace_item * personal,
 
 LIBETPAN_EXPORT
 void mailimap_namespace_data_free(struct mailimap_namespace_data * ns);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

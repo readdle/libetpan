@@ -37,11 +37,11 @@
 
 #define MAILMIME_DISPOSITION_H
 
+#include <libetpan/mailmime_types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <libetpan/mailmime_types.h>
 
 int mailmime_disposition_parse(const char * message, size_t length,
 			       size_t * indx,

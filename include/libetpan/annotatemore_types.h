@@ -33,10 +33,6 @@
 
 #define ANNOTATEMORE_TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/libetpan-config.h>
 #include <libetpan/mailstream.h>
 #include <libetpan/clist.h>
@@ -108,6 +104,12 @@ extern "C" {
   only need to recognize types that can be "embedded" into main
   IMAPrev1 types.
 */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 enum {
   MAILIMAP_ANNOTATEMORE_TYPE_ANNOTATE_DATA,          /* child of response-data   */
   MAILIMAP_ANNOTATEMORE_TYPE_RESP_TEXT_CODE          /* child of resp-text-code  */

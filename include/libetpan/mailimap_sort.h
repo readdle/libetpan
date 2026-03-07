@@ -32,10 +32,6 @@
 #ifndef libetpan_mailimap_sort_h
 #define libetpan_mailimap_sort_h
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-  
 #include <libetpan/libetpan-config.h>
 #include <libetpan/mailimap_extension.h>
 #include <libetpan/mailimap_sort_types.h>
@@ -97,6 +93,12 @@ extern "C" {
   
   LIBETPAN_EXPORT
   int mailimap_has_sort(mailimap * session);
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+  
 
 #ifdef __cplusplus
 }

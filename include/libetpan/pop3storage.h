@@ -37,10 +37,6 @@
 
 #define POP3STORAGE_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/pop3driver_types.h>
 #include <libetpan/pop3driver.h>
 #include <libetpan/pop3driver_cached.h>
@@ -79,6 +75,12 @@ extern "C" {
 
   @param flags_directory is the location of the flags
 */
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 LIBETPAN_EXPORT
 int pop3_mailstorage_init(struct mailstorage * storage,

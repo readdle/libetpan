@@ -37,11 +37,13 @@
 
 #define FEEDDRIVER_MESSAGE_H
 
+#include <libetpan/feeddriver_types.h>
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <libetpan/feeddriver_types.h>
 
 extern mailmessage_driver * feed_message_driver;
 

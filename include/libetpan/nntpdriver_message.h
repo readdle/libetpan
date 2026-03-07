@@ -37,11 +37,13 @@
 
 #define NNTPDRIVER_MESSAGE_H
 
+#include <libetpan/nntpdriver_types.h>
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <libetpan/nntpdriver_types.h>
 
 extern mailmessage_driver * nntp_message_driver;
 

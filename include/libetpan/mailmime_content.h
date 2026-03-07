@@ -37,11 +37,11 @@
 
 #define MAILMIME_CONTENT_H
 
+#include <libetpan/mailmime_types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <libetpan/mailmime_types.h>
 
 LIBETPAN_EXPORT
 char * mailmime_content_charset_get(struct mailmime_content * content);

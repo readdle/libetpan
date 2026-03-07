@@ -37,10 +37,6 @@
 
 #define LIBETPAN_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/libetpan_version.h>
 #include <libetpan/maildriver.h>
 #include <libetpan/mailmessage.h>
@@ -120,6 +116,10 @@ extern "C" {
 #include <libetpan/mailengine.h>
 #include <libetpan/mailprivacy_gnupg.h>
 #include <libetpan/mailprivacy_smime.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifdef __cplusplus
 }

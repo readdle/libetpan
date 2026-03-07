@@ -37,12 +37,12 @@
 
 #define  MAILMIME_WRITE_MEM_H
 
+#include <libetpan/mailmime_types.h>
+#include <libetpan/mmapstring.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <libetpan/mailmime_types.h>
-#include <libetpan/mmapstring.h>
 
 LIBETPAN_EXPORT
 int mailmime_fields_write_mem(MMAPString * f, int * col,

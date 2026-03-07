@@ -37,10 +37,6 @@
 
 #define NEWSNNTP_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifdef HAVE_INTTYPES_H
 #	include <inttypes.h>
 #endif
@@ -52,6 +48,10 @@ extern "C" {
 #include <libetpan/newsnntp_socket.h>
 #include <libetpan/newsnntp_ssl.h>
 #include <libetpan/newsnntp_types.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*
    newsnntp_new()

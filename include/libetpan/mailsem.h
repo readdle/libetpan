@@ -39,6 +39,10 @@
 
 #include <libetpan/libetpan-config.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct mailsem {
   void * sem_sem;
   int sem_kind;
@@ -55,5 +59,9 @@ int mailsem_up(struct mailsem * sem);
 
 LIBETPAN_EXPORT
 int mailsem_down(struct mailsem * sem);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -37,10 +37,6 @@
 
 #define IMAPSTORAGE_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <libetpan/imapdriver_types.h>
 
 /*
@@ -77,6 +73,12 @@ extern "C" {
 
   @param cache_directory is the location of the cache
 */
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 LIBETPAN_EXPORT
 int imap_mailstorage_init(struct mailstorage * storage,

@@ -37,15 +37,15 @@
 
 #define MAILMH_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <sys/types.h>
 
 #include <libetpan/libetpan-config.h>
 #include <libetpan/carray.h>
 #include <libetpan/chash.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 enum {
   MAILMH_NO_ERROR = 0,
