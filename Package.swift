@@ -29,7 +29,7 @@ var saslSources: [String] = [
 
 let saslTarget: Target
 
-#if TARGET_ANDROID
+#if TARGET_ANDROID || TARGET_LINUX
     saslSources.append(contentsOf: [
         "cyrus-sasl/plugins/digestmd5.c",
         "cyrus-sasl/plugins/ntlm.c",
@@ -49,6 +49,7 @@ let saslTarget: Target
             .headerSearchPath("cyrus-sasl/plugins"),
             .headerSearchPath("config/ios", .when(platforms: [.iOS])),
             .headerSearchPath("config/android", .when(platforms: [.android])),
+            .headerSearchPath("config/linux", .when(platforms: [.linux])),
             .headerSearchPath("include/sasl"),
             .define("GCC_FALLTHROUGH", to: "/* fall through */"),
             .define("PLUGINDIR", to: "\"/usr/lib/sasl2\""),
@@ -95,7 +96,7 @@ var package = Package(
         .target(
             name: "etpan",
             dependencies: [
-                .target(name: "sasl2", condition: .when(platforms: [.android, .iOS])),
+                .target(name: "sasl2", condition: .when(platforms: [.android, .iOS, .linux])),
             ],
             path: ".",
             exclude: [
@@ -145,6 +146,7 @@ var package = Package(
                 .headerSearchPath("config/macos", .when(platforms: [.macOS])),
                 .headerSearchPath("config/ios", .when(platforms: [.iOS])),
                 .headerSearchPath("config/android", .when(platforms: [.android])),
+            .headerSearchPath("config/linux", .when(platforms: [.linux])),
                 .headerSearchPath("include/libetpan"),
                 .headerSearchPath("src"),
                 .headerSearchPath("src/data-types"),
@@ -173,9 +175,9 @@ var package = Package(
                 .define("HAVE_CONFIG_H", to: "1")
             ],
             linkerSettings: [
-                // We use system (aka toolchain) OpenSSL on Android, that's why we add linking here
-                .linkedLibrary("crypto", .when(platforms: [.android])),
-                .linkedLibrary("ssl", .when(platforms: [.android])),
+                // We use system (aka toolchain) OpenSSL on Android and Linux, that's why we add linking here
+                .linkedLibrary("crypto", .when(platforms: [.android, .linux])),
+                .linkedLibrary("ssl", .when(platforms: [.android, .linux])),
                 .linkedLibrary("sasl2", .when(platforms: [.macOS])),
                 .linkedLibrary("iconv", .when(platforms: [.iOS])),
                 .linkedLibrary("z"),
