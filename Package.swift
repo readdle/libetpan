@@ -146,7 +146,7 @@ var package = Package(
                 .headerSearchPath("config/macos", .when(platforms: [.macOS])),
                 .headerSearchPath("config/ios", .when(platforms: [.iOS])),
                 .headerSearchPath("config/android", .when(platforms: [.android])),
-            .headerSearchPath("config/linux", .when(platforms: [.linux])),
+                .headerSearchPath("config/linux", .when(platforms: [.linux])),
                 .headerSearchPath("include/libetpan"),
                 .headerSearchPath("src"),
                 .headerSearchPath("src/data-types"),
